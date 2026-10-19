@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoggoth with Mad Cows disease - BY Mukul Namagiri  </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+body{margin:0;padding:20px;background:#000;color:#eee;font-family:'Kalam',cursive,sans-serif;font-size:1.1rem;line-height:1.7}
+main{max-width:800px;margin:0 auto;padding:0 10px}
+h1,h2,h3{font-weight:400;margin:2em 0 .5em;line-height:1.3}
+h1{font-size:2rem}h2{font-size:1.6rem;border-bottom:1px solid #333;padding-bottom:.2em}h3{font-size:1.3rem}
+hr{border:0;border-top:1px solid #333;margin:2em 0}
+a{color:#8ab4f8}
+img{max-width:100%;border:1px solid #444;margin:1em 0;display:block;border-radius:4px}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.def{border:1px solid #444;border-left:4px solid #8ab4f8;border-radius:4px;background:#1a1a1a;padding:4px 16px;margin:1.2em 0}
+.def b.t{display:block;font-weight:700;margin-top:8px}
+.term{position:relative;border-bottom:1px dashed #8ab4f8;color:#8ab4f8;cursor:pointer}
+.pop{display:none;position:absolute;left:0;top:1.6em;z-index:50;width:min(480px,86vw);background:#111;color:#eee;border:1px solid #555;border-radius:4px;padding:8px 14px;font-size:.9rem;line-height:1.5;box-shadow:0 4px 18px #000a;cursor:default}
+.term:hover .pop,.term:focus .pop,.term.open .pop{display:block}
+.toggle-btn{position:fixed;top:20px;right:20px;background:#333;color:#eee;border:1px solid #555;padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Kalam',cursive;z-index:999}
+body.light{background:#fff;color:#222}
+body.light a,body.light .term{color:#1a0dab;border-color:#1a0dab}
+body.light img,body.light .def{border-color:#ccc}
+body.light .def{background:#f5f5f5;border-left-color:#1a0dab}
+body.light .pop{background:#fff;color:#222;border-color:#ccc;box-shadow:0 4px 18px #0003}
+body.light hr,body.light h2{border-color:#ddd}
+body.light .toggle-btn{background:#eee;color:#222;border-color:#ccc}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;margin:1.5em 0;width:100%;font-size:.95rem}
+th,td{border:1px solid #444;padding:8px 10px;text-align:left}
+th{background:#1a1a1a;font-weight:400}
+body.light th{background:#eee}body.light th,body.light td{border-color:#ccc}
+@media(max-width:640px){body{padding:10px;font-size:.95rem;line-height:1.6}main{padding:0 4px}h1{font-size:1.5rem}h2{font-size:1.3rem}h3{font-size:1.1rem}.toggle-btn{top:10px;right:10px;padding:5px 12px;font-size:.85rem}}
+
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.8em;background:#1a1a1a;border:1px solid #333;border-radius:3px;padding:0 .3em}
+.eq{margin:1.2em 0;overflow-x:auto}
+ul.where{list-style:none;margin:.2em 0 1.6em;padding:.1em 0 .1em 1rem;border-left:2px solid #333;font-size:.95rem;line-height:1.6}
+ul.where li{margin:.35em 0}
+figure{margin:1.8em 0}
+figure img{margin:0;width:100%;height:auto;background:#000}
+figure a{display:block;border:0}
+figcaption{font-size:.9rem;color:#aaa;margin-top:.5em;line-height:1.5}
+figure.wide{width:min(1180px,calc(100vw - 40px));position:relative;left:50%;transform:translateX(-50%)}
+pre.out{margin:1.2em 0;padding:10px 14px;overflow-x:auto;white-space:pre;background:#0d0d0d;color:#cfeec8;border:1px solid #333;border-left:4px solid #39ff14;border-radius:4px;font:.8rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+table.num td:not(:first-child),table.num th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.tw table{font-size:.88rem}
+tr.sel td{background:#8ab4f822;font-weight:700}
+details{margin:1em 0}summary{cursor:pointer;color:#8ab4f8}
+ol,ul{padding-left:1.4em}
+body.light code{background:#eee;border-color:#ccc}
+body.light ul.where{border-color:#ccc}
+body.light figcaption{color:#555}
+body.light pre.out{background:#f4f8f3;color:#1d3a18;border-color:#ccc;border-left-color:#2a7d1e}
+body.light tr.sel td{background:#1a0dab18}
+body.light summary{color:#1a0dab}
+@media(max-width:900px){figure.wide{width:100%;left:0;transform:none}}
+</style>
+</head>
+<body>
+<button class="toggle-btn" onclick="document.body.classList.toggle('light')">Toggle theme</button>
+<main>
+<h1>Model Collapse, Creativity and the Limits of Language Models</h1>
+
+<p>Let us say someone asks you how many numbers there are. You might say there are infinitely many of them. To show that there are infinitely many, you simply use the successor function. This seems very intuitive, since the proof requires a function with standard inputs and outputs. But for vaguer things, such as trends, which cannot be represented by functions, how should we go about it? At this point you might be wondering what I am getting at.</p>
+
+<p>One fine evening, I was studying how language evolved and trying to understand phonetics: how humans communicate, and what effects it had on the evolution and development of the human brain. As I observed the evolution of the communication cues used by creatures from the simple to the complex, I was pleasantly stunned. With just 26 letters we are able to string together complex words, sentences and concepts. The emergence of complexity from such simple elements is very surprising. The order in which we combine letters into words, and the order in which we place the words, make up sentences, and those itty-bitty combinations can mean vastly different things when placed in different arrangements. It is not just that there are several cues; it is not just what you said, it is how you said it, haha.</p>
+
+<p>This is not unique to humans. Several species on the planet coordinate and communicate using different verbal and non-verbal cues. Pods of orcas form coordinated patterns for hunting strategies. Different birds can mimic human speech in hopes of a reward. There are documented cases of complex behavior in these animals: much higher levels of reasoning, complex emotions, grief, altruism and coordination. The complexity and lifestyle habits that emerge from these cannot be understated, at least in a biological, evolutionary sense. There are several documented cases of orcas that willingly starved themselves rather than eat something that does not usually fit into their trained diet. Culture, communication and learned behavior produce these behaviors.</p>
+
+<p>Language models are no different in this regard: they are giant regularizers and approximators at the end of the day. A bad diet leads to bad health, and so bad data leads to bad responses. While studying methods like RLHF, SFT and RLVR, which are essentially introduced as ways to convert these next-token prediction machines into useful, helpful chat assistants, and to fine-tune models to be robust against attacks and make them helpful, harmless and honest, the problem of bad data, and of running out of data, fascinated me. This is not a new pondering unique to me; humanity has always worried about not having enough knowledge. Stories like Johann Faust and his deal with the devil for eternal knowledge, or the story of Pandora's box, come to mind. One of the proposed solutions is synthetic data: a way to generate artificial data and use it to train language models. In this post I will not focus on synthetic data as a primary topic, although I will add some sources if you are looking to dig deeper. There is a huge ongoing debate about the effectiveness of this kind of data, with both sides having good points to argue, but it warrants a whole field of its own.</p>
+
+<p>The complication arises when human values are involved. How do we, as humans with biological evolutionary drives inherent in us to conquer, acquire more resources and expand, keep those drives in check? It is a simple answer: our values. For much of human history, most wars, disagreements and loss of human life are attributable to the type of value system we hold and pass down. An empire with little to no moral values is bound to fall under its own weight. This raises an important problem: how do we train AIs to have, and understand, human values? Another way to put it is: how do we even go about aligning them? Let us say we have solved the alignment problem. How can we then ensure that AIs that are fed on their own generated data guarantee that human values are passed down? If we cannot, then we are dealing with a shoggoth with mad cow disease, and things become much more unpredictable from here.</p>
+
+<p>There are several works on this. Although it is not a very urgent problem in AI training in general, it is an important one from the safety perspective. There are incentives for model providers to introduce more architectures and move beyond the textual medium into vision, sound and multimodal models. For this exploration I am severely constraining the scope to the narrow world of the textual medium and strictly language models. Several prominent researchers, such as Yann LeCun, believe that the singular, narrow medium of text cannot be the way forward for companies building AGI.</p>
+
+<p>Consider the following question: when an irregular language is constructed from a normal language and then used to train, let us say, a large language model, do the recombinations of existing patterns constitute knowledge, such that the neural network attempts to represent the whole of the internet? If novelty emerges from the hidden patterns present within the text, and a novel concept is produced from a field still in its infancy, what happens when we run out of data to train on and topics on the fringes are produced over and over again? Do we reach a point where new work is not information-dense, leading to a decrease in quality? And at that point, how do we know if the model comes up with an unprovable conjecture that cannot be verified?</p>
+
+<h2>Model Collapse</h2>
+
+<p>There are two main sources of model collapse from a theoretical standpoint, and to claim that a model gets dumber after being trained on its own outputs, we need to be precise about them.</p>
+
+<h3>Notation</h3>
+
+<p>Let $(\mathcal X,\mathcal B)$ be a measurable space, or simply a <span class="term" tabindex="0" onclick="this.classList.toggle('open')">Borel space<span class="pop"><b>Three properties of a Borel space</b><br>For $(X,\mathcal B(X))$, the Borel $\sigma$-algebra must satisfy:<br>1. <b>Contains the whole space:</b> $X\in\mathcal B(X)$, equivalently $\emptyset\in\mathcal B(X)$.<br>2. <b>Closed under complements:</b> $A\in\mathcal B(X)\implies X\setminus A\in\mathcal B(X)$.<br>3. <b>Closed under countable unions:</b> $A_1,A_2,\dots\in\mathcal B(X)\implies\bigcup_{n=1}^{\infty}A_n\in\mathcal B(X)$.<br>By De Morgan's laws it is also closed under countable intersections, and it is the <b>smallest</b> $\sigma$-algebra containing all open sets: $\mathcal B(X)=\sigma(\tau)$.</span></span>. <small>(Hover over or tap the underlined term.)</small></p>
+
+<p>Let $\mathcal P(\mathcal X)$ be the set of all probability measures on $(\mathcal X,\mathcal B)$. Let $p_0\in\mathcal P(\mathcal X)$ be the true real-data distribution. Let $t\in\mathbb N_0=\{0,1,2,\dots\}$ be the generation index. Let $q_t\in\mathcal P(\mathcal X)$ be the distribution induced by the generative model at generation $t$. Thus $q_0$ is the initial model trained on real data, and $q_1,q_2,\dots$ are recursively trained on synthetic data.</p>
+
+<h3>Statistical and Functional Approximation Errors</h3>
+
+<p>Let $N_t\in\mathbb N$ be the number of samples used to train the model at generation $t$. For $t\ge1$, the training data for generation $t$ are
+$$D_t=\{x_{t,1},\dots,x_{t,N_t}\},\qquad x_{t,j}\sim q_{t-1}\ \text{i.i.d.}$$
+For $t=0$, the training data are $D_0=\{x_{0,1},\dots,x_{0,N_0}\}$ with $x_{0,j}\sim p_0$ i.i.d. The empirical distribution of the training data for generation $t\ge1$ is
+$$\hat q_{t-1}^{(N_t)}:=\frac1{N_t}\sum_{j=1}^{N_t}\delta_{x_{t,j}},$$
+where $\delta_x$ is the Dirac measure at $x$. Let $\mathcal A:\mathcal P(\mathcal X)\to\mathcal P(\mathcal X)$ be the training algorithm that maps an empirical distribution to a trained generative model distribution, so that $q_t=\mathcal A(\hat q_{t-1}^{(N_t)})$ for $t\ge1$. Let $d$ be a metric on probability measures, for example total variation:
+$$d_{\mathrm{TV}}(p,q)=\sup_{A\in\mathcal B}|p(A)-q(A)|.$$</p>
+
+<figure class="figure w-100 text-center">
+<a href="01-model-collapse-overview.png" class="d-block" target="_blank" rel="noopener"><img src="01-model-collapse-overview.png" alt="Model collapse overview" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+</figure>
+<div class="def"><b class="t">1. Statistical approximation error</b>
+<p>Due to finite samples, the empirical distribution cannot capture the full previous distribution. For generation $t\ge1$,
+$$\epsilon_t^{\mathrm{stat}}:=d\!\left(q_{t-1},\hat q_{t-1}^{(N_t)}\right).$$
+For finite $N_t$ this is generally greater than $0$. As $N_t\to\infty$, for many choices of $d$ it goes to $0$ by the law of large numbers, but it is never exactly zero for finite data.</p></div>
+
+<figure class="figure w-100 text-center">
+<a href="02-statistical-approximation-error.png" class="d-block" target="_blank" rel="noopener"><img src="02-statistical-approximation-error.png" alt="Statistical approximation error" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+</figure>
+<div class="def"><b class="t">2. Functional approximation error</b>
+<p>Due to model and optimization limitations, the trained model cannot exactly match the empirical distribution:
+$$\epsilon_t^{\mathrm{func}}:=d\!\left(\hat q_{t-1}^{(N_t)},q_t\right).$$
+It arises because the model class may not contain $\hat q_{t-1}^{(N_t)}$, the model has finite capacity, optimization may not reach the global optimum, and the training objective may not exactly match $d$.</p></div>
+
+<p>For any $t\ge1$, by the triangle inequality, $d(q_{t-1},q_t)\le\epsilon_t^{\mathrm{stat}}+\epsilon_t^{\mathrm{func}}$, and chaining this over generations gives
+$$d(p_0,q_T)\le\sum_{t=1}^{T}\left(\epsilon_t^{\mathrm{stat}}+\epsilon_t^{\mathrm{func}}\right).$$
+For each generation, the statistical and functional errors accumulate.</p>
+
+<h2>Is Dissimilarity Really Loss?</h2>
+
+<p>Now that we have established that information loss from the original model is inevitable, you might wonder whether it is even right to classify this as a form of loss. If you think deeply, we are working with a humongous amount of data. Is dissimilarity actually a loss of information, or, like evolution, will it be its own thing? Yes, it is different, but is it necessarily a bad thing? There is something much deeper here: the question of what creativity is. For one, it is very subjective and depends on who you ask and what context it refers to. It is a problem that has occupied minds since the dawn of time. Turing talked about this in reference to Ada Lovelace's work, asking whether machines can originate anything. Novelty can emerge either from the recombination of existing knowledge or from doing something so unique that it was never done before. Take the Langlands programme as an example: much of the recent discovery of the last couple of decades is a direct result of it.</p>
+
+<p>Example: if a chess-playing machine gives you the right move in a game of pure chance, is that truly creative and truly novel? But out of a million wrong attempts, was it being creative? There should be something to constrain this. Is it the eye of the beholder that recognizes something as creative?</p>
+
+<p>There is also the case of the knee-jerk reaction. Are the responses really akin to that, or is it just blurting things out? Current LLMs do not have any real-time weight-update mechanism built into them, so many of the generations are a kind of knee-jerk reaction to various prompts. There is also the debate about the personality of language models: is it just an amalgamation of average human traits? One unique way to put this is that the generalization these models produce gives intelligent, useful output, without necessarily a thinking, feeling machine producing it.</p>
+
+<p>There are three different kinds of creativity: combinatorial, exploratory and transformational.</p>
+<ol>
+<li><b>Combinatorial creativity</b> makes unfamiliar combinations of familiar ideas.</li>
+<li><b>Exploratory creativity</b> finds new solutions inside the current style.</li>
+<li><b>Transformational creativity</b> changes the current style.</li>
+</ol>
+
+<p>To understand what a mix of generations from previous models actually preserves, the computational aspects are discussed in the paper below. I found some phenomenal work on this topic. I have tried to make the notation consistent across the entire post so that it does not take your grasp away, since every paper presented has its own form of the same notation. I will try my best to do faithful justice to the presented research, but I am flawed with my own preconceived notions, and I did my best to do justice to these wonderful works.</p>
+
+<p><b>Effects of synthetic data:</b> <a href="https://arxiv.org/pdf/2404.05090">arxiv.org/pdf/2404.05090</a>. The paper addresses what the authors aptly describe as "data pollution", and in a sense this correctly captures the phenomenon. They go into much more detail on the distributional shift that happens due to training on synthetic data.</p>
+
+<h2>Theoretical Setup for Recursive Training and Model Collapse</h2>
+
+<h3>1. Statistical Language Model</h3>
+
+<p>We consider a language model with vocabulary size $s$, context length $\ell$, and $c\le s^\ell$ possible contexts. For a fixed context $j$, the true conditional probability of the next token being $k\in[s]$ is
+$$p_{jk}:=\mathbb P(Y=k\mid X=j).$$
+For a fixed context $j$, we write the true token distribution as
+$$p_0:=(p_{j1},\dots,p_{js})\in\Delta^{s-1},$$
+where $\Delta^{s-1}$ is the probability simplex.</p>
+
+<p>We observe a dataset of $N$ context–next-token pairs for this context, say $\{(e_j,y_l)\}_{l=1}^N$, where $y_l\in\{e_1,\dots,e_s\}$ are one-hot vectors and $y_l\sim\mathrm{Multinomial}(1,p_0)$ independently. Training a softmax classifier with one-hot context embeddings and categorical cross-entropy yields the empirical frequency estimate
+$$\hat p_{jk}=\frac1N\sum_{l=1}^N y_{lk}.$$
+Thus the first-generation model is
+$$q_0:=(\hat p_{j1},\dots,\hat p_{js})=\frac1N\sum_{l=1}^N y_l.$$
+This matches the earlier notation: $q_0$ is the initial model trained on real data.</p>
+
+<h3>2. Recursive Training</h3>
+
+<p>For generation $t\ge1$, the model $q_t$ is trained on a mixture of real data from $p_0$ and synthetic data from previous models $q_0,\dots,q_{t-1}$. Let</p>
+<ul>
+<li>$N_{t,0}$ be the number of real samples from $p_0$ used to train $q_t$;</li>
+<li>for $u\ge1$, $N_{t,u}$ be the number of samples from $q_{u-1}$ used to train $q_t$;</li>
+<li>$N_t:=N_{t,0}+\sum_{u=1}^t N_{t,u}$ be the total number of training samples for $q_t$.</li>
+</ul>
+<p>Then
+$$q_t=\frac1{N_t}\left(\sum_{l=1}^{N_{t,0}}y_l^{(0)}+\sum_{u=1}^t\sum_{l=1}^{N_{t,u}}y_l^{(u)}\right),$$
+where $y_l^{(0)}\sim p_0$ and $y_l^{(u)}\sim q_{u-1}$ are independent one-hot samples. This is the empirical mean of the training data, which is exactly the softmax solution.</p>
+<figure class="figure w-100 text-center">
+<a href="03-recursive-training.png" class="d-block" target="_blank" rel="noopener"><img src="03-recursive-training.png" alt="Recursive training" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+</figure>
+
+<h3>Fully Synthetic Setting</h3>
+<p>For $t\ge1$: $N_{t,0}=0$, $N_{t,t}=n$, and $N_{t,u}=0$ for $u\notin\{t\}$. Thus
+$$q_t=\frac1n\sum_{l=1}^n y_l^{(t)},\qquad y_l^{(t)}\sim q_{t-1}.$$
+For $t=0$, $q_0=\frac1N\sum_{l=1}^N y_l^{(0)}$ with $y_l^{(0)}\sim p_0$.</p>
+<figure class="figure w-100 text-center">
+<a href="04-fully-synthetic-setting.png" class="d-block" target="_blank" rel="noopener"><img src="04-fully-synthetic-setting.png" alt="Fully synthetic setting" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+</figure>
+
+<h3>Partially Synthetic Setting</h3>
+<p>For $t\ge1$: $N_{t,0}=N$, $N_{t,t}=n$, and $N_{t,u}=0$ otherwise. Thus
+$$q_t=\frac1{N+n}\left(\sum_{l=1}^N y_l^{(0)}+\sum_{l=1}^n y_l^{(t)}\right),$$
+with $y_l^{(0)}\sim p_0$ and $y_l^{(t)}\sim q_{t-1}$.</p>
+<figure class="figure w-100 text-center">
+<a href="05-partially-synthetic-setting.png" class="d-block" target="_blank" rel="noopener"><img src="05-partially-synthetic-setting.png" alt="Partially synthetic setting" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+</figure>
+
+<h3>3. Main Results</h3>
+
+<p>Define the following quantities for the model at generation $t\ge0$:
+$$\|q_t\|_\infty:=\max_{i\in[s]}q_{t,i},\qquad \sigma_t:=\|q_t\|_2^2=\sum_{i=1}^s q_{t,i}^2,\qquad \Sigma_t:=\mathbb E[\sigma_t].$$
+For the true distribution $p_0$, let $S^*:=\|p_0\|_2^2=\sum_{i=1}^s p_{0,i}^2$. We assume the initial distribution is nontrivial: $S^*<1$ and $\|p_0\|_\infty<1$.</p>
+
+<div class="def"><b class="t">Definition: Total Collapse</b>
+<p>Total collapse occurs in the recursive training process if $q_t$ converges to some Dirac mass $\delta_i$ for some token $i\in[s]$ as $t\to\infty$.</p></div>
+
+<h3>3.1 Fully Synthetic: Training on Synthetic Data</h3>
+
+<p>In the fully synthetic setting, the process is a Markov chain on the probability simplex with absorbing states $\{\delta_i:p_{0,i}>0\}$. Total collapse occurs almost surely. Let
+$$T:=\inf\{t\ge0:\|q_t\|_\infty=1\}$$
+be the first generation at which the model becomes a Dirac mass, let $\rho_t:=\mathbb P(\|q_t\|_\infty=1)$ be the probability that collapse has occurred by generation $t$, and let $\tilde s:=|\mathrm{supp}(p_0)|$ be the support size of $p_0$.</p>
+
+<div class="def"><b class="t">Theorem: Control on Total Collapse (Fully Synthetic)</b>
+<p>1. The expected squared norm is
+$$\Sigma_t=1-\left(1-\frac1n\right)^{t+1}(1-S^*),\qquad t\ge0.$$
+2. The collapse probability satisfies
+$$1-n(1-S^*)\left(1-\frac1n\right)^{t+1}\le\rho_t\le1-\frac{1-S^*}{1-1/\tilde s}\left(1-\frac1n\right)^{t+1}.$$
+3. The expected collapse time satisfies
+$$\frac{1-S^*}{1-1/\tilde s}(n-1)\le\mathbb E[T]\le(1-S^*)\,n(n-1).$$</p></div>
+
+<div class="def"><b class="t">Proposition: Limiting Direction</b>
+<p>In the fully synthetic case,
+$$\mathbb P\left(\lim_{t\to\infty}q_t=\delta_i\right)=p_{0,i},\qquad i\in[s].$$
+Thus the surviving token is likely one with high initial probability.</p></div>
+
+<h3>3.2 Partially Synthetic: Handling Model Collapse with Real Data</h3>
+
+<p>In the partially synthetic setting, real data is injected at each generation. Let
+$$\alpha:=\frac n{N+n},\qquad \beta:=\alpha\left(\left(1+\frac1N\right)\alpha-\frac1N\right).$$</p>
+
+<div class="def"><b class="t">Theorem: Model Variation (Partially Synthetic)</b>
+<p>For $t\ge1$,
+$$\Sigma_t=\frac1N\,\frac{1+2\alpha-(1-1/N)\alpha\beta^t}{1+(1+1/N)\alpha}+\frac{(1-1/N)S^*}{1+(1+1/N)\alpha}\left[1+\alpha-\frac{\alpha\beta^t}{N}\right].$$
+For $t=0$, $\Sigma_0=S^*+\frac{1-S^*}{N}$. When $n\ll N$, $\Sigma_t\approx S^*$. Even when $n\gg N$, $\Sigma_t$ approaches $S^*$ for large $N$.</p></div>
+
+<div class="def"><b class="t">Theorem: Model Deviation (Partially Synthetic)</b>
+<p>Define
+$$G_n(s):=\begin{cases}C_1\,s\,e^{\frac{C_0}{n}2e}&\text{if }\frac{C_0}{e}n+2\le s;\\[4pt] C_1\,s\left(\frac{C_0n}{s}\right)^{s/2}&\text{if }\frac{C_0}{4}n+2\le s<\frac{C_0}{e}n+2;\\[4pt] 2^s-2&\text{if }s<\frac{C_0}{4}n+2,\end{cases}$$
+where $C_0=e^{3/2}\sqrt{2\pi}\approx3.19$ and $C_1=6e/\pi^{3/2}\approx2.93$. Then for $t\ge1$,
+$$\mathbb E\|q_t-q_0\|_1<\frac1N\sqrt{\frac{\pi n}{2}}\,G_n(s).$$
+In particular, to ensure $\mathbb E\|q_t-q_0\|_1<\epsilon$, one can take
+$$n\le2\pi e^{-2}\min\left\{s-2,\ \log\!\left(\frac{\sqrt{2\pi}\,N\epsilon}{6es}\right)\right\}.$$
+This shows that the number of synthetic samples should be exponentially smaller than the real data to keep the model close to the first generation.</p></div>
+
+<h3>4. Interpretation</h3>
+
+<p>The recursive process is
+$$p_0\longrightarrow q_0\longrightarrow q_1\longrightarrow q_2\longrightarrow\cdots$$
+In the fully synthetic case, each generation loses information about the tails of the original distribution. The variance $\Sigma_t$ increases to $1$, meaning the model becomes a Dirac mass. The collapse time is at least of order $n$ and at most of order $n^2$.</p>
+
+<p>In the partially synthetic case, injecting real data prevents total collapse. The model variation $\Sigma_t$ remains bounded, and the deviation from the first-generation model is controlled by the amount of synthetic data. To keep the deviation small, the amount of synthetic data should be logarithmic in the ratio $N\epsilon/s$, i.e., exponentially smaller than the real data.</p>
+
+<h2>Understanding How to Preserve Response Quality</h2>
+
+<p><a href="https://arxiv.org/pdf/2307.01850">arxiv.org/pdf/2307.01850</a></p>
+
+<p>Dissimilarity from the distribution does not guarantee a degenerate model. The paper above digs into the output. Their claim: under mild conditions, an autophagous generative process is a MAD generative process. The paper discusses concepts similar to those above, but it also studies the sampling bias parameter $\lambda$, which lets you fix the range of the distribution from which you can pick samples. They then prove the convergence of the series using martingales and supermartingales: for the Gaussian autophagous process with $\lambda\le1$, the covariance matrix converges almost surely to zero. In the multivariate case, the sample covariance matrix is a Wishart random matrix, a product of independent chi-square variables.</p>
+
+<h2>How Much of the Generations Is Copied from the Training Data?</h2>
+
+<p><a href="https://arxiv.org/pdf/2111.09509">arxiv.org/pdf/2111.09509</a></p>
+
+<p>In this work the authors explored how novel the responses are, and they used an acronym that stands for rating verbal novelty. Earlier we explored novelty in generations in the case of creative writing, and novelty in producing p-novel and h-novel tasks. In this work they analysed it from the perspective of the novelty of n-grams, novel morphological structures and novel syntactic structures.</p>
+
+<p>One of the problems with transformer-based models is that they simply replicate entire passages instead of creating new, novel text; they simply copy entire sentences from the training data. The authors established in their experiments that generated n-grams longer than 6 words are rarely novel. They also explore the effects of recency, which creates a recency bias.</p>
+
+<p>The term "super copying" is used for a related phenomenon. All the architectures defined above use some form of copying, but these copied strings rarely exceed 10 tokens. The authors did notice super copying, which happens sometimes, not often, but it is a prevalent phenomenon, at least in older models like GPT-2. Repetition in the training data leads to recurrent generations, that is, to copying.</p>
+
+<p>Novelty can be increased by top-k sampling, top-p sampling, temperature and so on, but increasing the novelty of the text decreases its quality. To actually measure this, they used a metric called the pointwise duplication score. Manipulations to the decoding scheme that result in higher-quality text also decrease novelty.</p>
+
+<p><b>Syntactic novelty:</b> at the level of global sentence structure, models show a high level of syntactic novelty.</p>
+
+<h2>How Are Rare Facts Learned?</h2>
+
+<p>Before moving on to complete novelty, let us try to understand how rare facts are learned. The authors of the paper used an approach to see whether the knowledge learned by the model can be retrieved. Most of the data a language model learns from is very repetitive, in the sense that much of it is very similar, so the question arises: how can we capture rare knowledge? To study this phenomenon, they used an entity-tagging approach in which they correlated questions with concepts and tested how good the actual retrieval is for any kind of knowledge.</p>
+
+<p>They observed that systems like RAG provide vastly more benefit than scaling the model size or increasing the training data; to obtain comparable results with those methods, the scale would have to be increased enormously. They also noted that training the model for multiple epochs, that is, letting the model see the training data over multiple iterations, increased accuracy: the model was able to capture rare knowledge and retrieve it. The same goes for humans. Although this was less prevalent in humans, the pattern remains: the more the data is repeated, the more they were able to recollect. One of the unique takeaways from this study is the rate at which models were able to retrieve what they know, even if they do not see a whole lot of examples of that data.</p>
+
+<ul>
+<li>Understanding the model's struggles on long-tail data: <a href="https://arxiv.org/pdf/2211.08411">arxiv.org/pdf/2211.08411</a></li>
+<li>Understanding model collapse and possible ways to prevent the curse of recursion: <a href="https://arxiv.org/pdf/2404.01413">arxiv.org/pdf/2404.01413</a></li>
+<li>Understanding model collapse and forgetfulness in detail: <a href="https://arxiv.org/pdf/2305.17493">arxiv.org/pdf/2305.17493</a></li>
+<li>If collapse does happen, what is its rate from a computational perspective: <a href="https://arxiv.org/pdf/2412.17646">arxiv.org/pdf/2412.17646</a></li>
+<li>Understanding the self-consuming loop and the progressive decrease in generation quality, specifically in computer vision: <a href="https://arxiv.org/pdf/2307.01850">arxiv.org/pdf/2307.01850</a></li>
+</ul>
+
+<p>So if such an inevitable collapse is bound to happen what happens to the value system of the model. If such a model deems the human values to be less significant. it does not simply pass down the traits to further generation which could essentially lead a lot more serious harm. How can we ensure that In the words of Eliezer Yudkowsky  ""...the Riemann Hypothesis Catastrophe (as named, and credited to Minsky, in the forthcoming paper 'Friendly AI') - that an AI asked to solve the Riemann Hypothesis would convert the Solar System into computronium."" </p>
+
+
+<p>To really understand how the dynamics of such a system plays out. To evaluate how much of the value system is retained in a increasingly ai generated internet world. I tried to model a dynamical system on much smaller data with some of the key characteristics variables. Hoping this would allow me to sort understand how much data is retained on the fringes? With a naive hope that the incomprehensible very useful gibberish proofs that the ai might produce will lead to new results </p>
+
+
+
+
+<h2>Variables to Model</h2>
+<ul>
+<li>the amount of data it has seen over the long term</li>
+<li>the capture rate of the data by the parameters</li>
+<li>the ability to retrieve the data before it is lost</li>
+<li>the ability to rightfully reason about the data instead of giving a knee-jerk reaction</li>
+<li>the ability to retrieve rare data</li>
+<li>the accuracy of the retrieved data on the fringes</li>
+<li>the ability to produce novel data</li>
+<li>the amount of semantic similarity between the rare data and the novel conjecture produced</li>
+<li>the ability to recombine existing data in different ways to make a novel conjecture, and the ability to prove it</li>
+</ul>
+
+<!-- ============ BIT 1: Caveats on the modeling approach ============ -->
+<section id="modeling-caveats">
+  <p>
+    Here we are cheating a little. In our modeling, we only observe whether the fringe relations survive. True novelty is more nuanced than that; think of coming up with an entirely new form of mathematics to solve a problem, for instance. But for modeling purposes, I have grossly oversimplified it. As with most modeling experiments, the variables and dynamics grow exponentially.
+  </p>
+  <p>
+    This is a very gross oversimplification of the real complexity and should be taken as such. Modeling a modern language model at that level of complexity is simply not plausible with the current scheme.
+  </p>
+</section>
+
+
+<!-- ============ BIT 2: Motivation and scope ============ -->
+<section id="motivation-and-scope">
+  <p>
+    The dynamics captured by this approach are very limited, in the sense that we are not capturing creativity in any true sense. But even the current models are minuscule compared to a true superintelligence. Don&rsquo;t get me wrong: current models can cause catastrophic outcomes in the hands of malicious actors. My initial motive for writing this blog was to understand how a value system is captured, and whether values that sit in the fringes could become malformed into something malicious, with catastrophic consequences in a truly intelligent machine. I am narrowly restricting myself to the world of text and to this one-dimensional modeling scenario. Although, to be clear, anthropomorphizing AI systems as beings with thinking styles similar to humans is itself is oversimplification.
+  </p>
+  <p>
+    To even chip away at such a task, we have to make several assumptions. The current experiment is limited in the sense that we are dealing with Hopfield networks, which are a far simpler form of RNN than something like a large language model.
+  </p>
+</section>
+
+
+<!-- ============ BIT 3: Why the assumptions come first ============ -->
+<section id="why-assumptions-first">
+  <p>
+    I first thought of presenting the actual results and then slowly introducing more and more complex assumptions. On reflection, though, the work is much easier to grasp if you first have a sense of the assumptions involved, before going into the details. This clears a lot of confusion out of the way.
+  </p>
+</section>
+
+
+<!-- ============ BIT 4: Core setup ============ -->
+<section id="core-setup">
+  <p>
+    Here are some of the assumptions that I will be making in this post.
+  </p>
+  <p>
+    I am trying to approximate words and next-word pairs, which is what most language models do, selected by frequency with some randomness thrown in to keep things interesting.
+  </p>
+  <p>
+    To have complex dynamics at play, you need two things: not just semantic novelty, but syntactic novelty as well. The more complex the attention pattern, the larger the context window, and the more positional embedding is done, the greater the model&rsquo;s ability to reason conditionally.
+  </p>
+</section>
+
+
+<!-- ============ BIT 5: Assumptions 1 to 3 ============ -->
+<section id="assumptions-1-to-3">
+  <h3>Assumption 1: The Curse of the Agelast</h3>
+  <p>
+    The assumption goes like this:  <em>agelast</em>, which apparently means a person who never laughs. Is a pretty rare word to encounter in regular day to day life. There is a whole family of such words that simply disappear in the current model we are building.
+  </p>
+  <p>
+    Words such as these do indeed survive after a few generations in our modeling context. But in a fully recalibrated language model, where the entire recalculation of the neural weights happens, these are simply not passed down. We are looking only for support shrinkage, not an entire distributional shift.
+  </p>
+
+  <h3>Assumption 2: Words mean less than sentences</h3>
+  <p>
+    In this simple model, words appear in semantic neighborhoods, not as concepts in any richer sense. The concepts of wounds and death appear close together, but not every wound leads to death. We are assuming away compositional meaning here.
+  </p>
+
+  <h3>Assumption 3: Novel relations are not independently defined objects</h3>
+  <p>
+    When a word sits near a cluster boundary, that is an artifact of the clustering, not a genuine concept discovery.
+  </p>
+</section>
+
+
+<!-- ============ BIT 6: Assumptions 4 to 7 ============ -->
+<section id="assumptions-4-to-7">
+  <h3>Assumption 4: A rare pair suffers twice</h3>
+  <p>
+    Its position has low priority, and even if it survives, the sharp softmax suppresses its weight.
+  </p>
+
+  <h3>Assumption 5: New combinations are not compositional reasoning</h3>
+  <p>
+    They are convex interpolation in a frozen embedding space.
+  </p>
+
+  <h3>Assumption 6: The loss-of-memory condition</h3>
+  <p>
+    One of the fatal flaws of the current modeling approach is the loss of memory. The memory here is completely rebuilt at every generation. What carries over is the support of the previous generation&rsquo;s output.
+  </p>
+
+  <h3>Assumption 7: The mean as a baseline</h3>
+  <p>
+    The mean is smoother and may be harder or easier to fit, depending on the linearity of the system. The comparison is &ldquo;our model rolled out from the mean&rdquo; against &ldquo;the mean rolled out by persistence,&rdquo; not &ldquo;our model vs a run-level simulator.&rdquo;
+  </p>
+</section>
+
+
+<h2>Order of the execution steps:</h2>
+<ol>
+<li><b>Data for the prediction.</b> We take the 80% of each book as the readable text and holds out the last 20% for the prediction.</li>
+<li><b>Concept-based clustering.</b> We take nodes called concepts and cluster common words around 150 of them, each named by its nearest words. This is another form of a knowledge graph; the sentence level is a bit too complex for the current scenario.</li>
+<li><b>Relations between the concepts.</b> A relation joins two closely related concepts, and rare relations are the fringe. Relations that appear only in the held-out text are the hidden truths.</li>
+<li><b>The attention model.</b> It stores the training text, so one generation takes only seconds.</li>
+<li><b>The self-consuming loop.</b> Each generation reads a share of text written by the previous generation.</li>
+<li><b>The dynamical system.</b> We get the values of the agreed-upon variables at word, sentence, concept and attention level, fit a dynamical system to them, and test it on mixtures it never saw.</li>
+</ol>
+
+
+
+<h2>1. The corpus</h2>
+<p>The books are the nine Sherlock Holmes volumes from Project Gutenberg. Each book is split into sentences, lower-cased into words, and cut 80/20. Sentences longer than 18 words are dropped, and so are words seen fewer than 3 times. Words that are almost always capitalised in the middle of a sentence are treated as proper names: they stay in the vocabulary (the model can write them) but are kept out of the concepts, so that characters do not dominate.</p>
+<pre class="out">Loaded 9 books
+13,992 training sentences, 3,625 hidden sentences, vocabulary 3,002 words</pre>
+
+<h2>2. Words and meaning</h2>
+<p>Each word gets a 32-dimensional embedding from its co-occurrence counts (PPMI followed by an SVD), computed on the readable text only and then frozen. The sketch shows how the counts are taken: for every centre word $i$, count the words $j$ that fall within 4 positions of it, inside the same sentence.</p>
+<figure class="figure w-100 text-center">
+<a href="06-cooccurrence-ppmi-embeddings.png" class="d-block" target="_blank" rel="noopener"><img src="06-cooccurrence-ppmi-embeddings.png" alt="Sketch of how co-occurrence counts are taken inside a window" width="732" height="473" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">How the counts for the PPMI embeddings are taken.</figcaption>
+</figure>
+<div class="eq">$$\mathrm{PPMI}(i,j)=\max\!\Big(0,\ \log\frac{\#(i,j)/T}{\big(\#(i)/T\big)\,P_{0.75}(j)}\Big),\qquad P_{0.75}(j)=\frac{\#(j)^{0.75}}{\sum_{j'}\#(j')^{0.75}}$$</div>
+<ul class="where">
+<li><b>$\#(i,j)$</b> how many times word $j$ appears near centre word $i$; <b>$\#(i)$</b> how many times $i$ is the centre word; <b>$T$</b> the total number of such pairs.</li>
+<li><b>$P_{0.75}(j)$</b> the <b>smoothed context probability</b>: raising counts to the power $0.75$ stops very common context words from swamping rare ones.</li>
+<li>Negative values are dropped, the matrix is reduced to $32$ dimensions with a truncated SVD, and every embedding is scaled to unit length.</li>
+</ul>
+
+<h2>3. Concepts</h2>
+
+
+<div>
+  <div>A word counts as a <b>content word</b> only if:</div>
+  <div>
+    <div>• It is not a common grammar word like “the,” “and,” or “of.”</div>
+    <div>• It is not a person/place name — checked by whether it is capitalized mid-sentence at least 60% of the time.</div>
+    <div>• It has at least 3 letters.</div>
+    <div>• It appears at least 5 times.</div>
+    <div>• It does not appear in more than 2% of all sentences — so very common words like “said” are excluded because they are too generic to name a specific idea.</div>
+  </div>
+  <div>We take all words that pass those rules and use <b>weighted k-means</b> to group them.</div>
+  <div>In simple terms: the computer puts similar words into topic-like buckets, and some words count more heavily than others.</div>
+</div>
+
+<div class="eq">$$\min_{\{\mu_c\}}\ \sum_{w}\log(1+n_w)\,\big\|e_w-\mu_{c(w)}\big\|^{2},\qquad \bar\mu_c=\frac{\mu_c}{\|\mu_c\|}$$</div>
+<ul class="where">
+<li><b>$w$</b> a content word; <b>$e_w$</b> its embedding.</li>
+<li><b>$n_w$</b> how many times $w$ occurs in the readable text; $\log(1+n_w)$ stops very common words dominating a cluster.</li>
+<li><b>$c(w)\in\{1,\dots,150\}$</b> the <b>concept</b> assigned to $w$ ($150$ concepts, <code>N_CONCEPTS</code>).</li>
+<li><b>$\mu_c$</b> centre of concept $c$; <b>$\bar\mu_c$</b> its unit-length direction.</li>
+</ul>
+<p>Each concept is named by the four words nearest to $\bar\mu_c$ and by the most common WordNet category of its words.</p>
+<figure class="figure w-100 text-center">
+<a href="07-concept-words-weighted-kmeans.png" class="d-block" target="_blank" rel="noopener"><img src="07-concept-words-weighted-kmeans.png" alt="Check list for concept words and weighted k-means clustering" width="809" height="1022" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Which words may become concepts, and how they are clustered around 150 concept centres.</figcaption>
+</figure>
+<p>This is what the first 4 lines of the check list look like in practice: the run found 2,220 content words, which the weighted $k$-means grouped into 150 concepts. The most frequent concepts come first in the table, then the rarest.</p>
+<pre class="out">2,220 content words in 150 concepts   (WordNet categories: on)
+most frequent concepts, then the rarest:</pre>
+<div class="tw"><table class=""><thead><tr><th>concept</th><th>nearest words</th><th>WordNet</th><th>words</th><th>share of text %</th></tr></thead><tbody><tr><td>80</td><td>think, say, know, help</td><td>noun.cognition</td><td>17</td><td>4.04</td></tr><tr><td>99</td><td>night, last, day, time</td><td>noun.time</td><td>13</td><td>2.29</td></tr><tr><td>18</td><td>take, leave, let, give</td><td>noun.act</td><td>12</td><td>2.01</td></tr><tr><td>75</td><td>good, dear, cried, wonderful</td><td>verb.communication</td><td>14</td><td>2.00</td></tr><tr><td>29</td><td>yet, enough, quite, clear</td><td>adv.all</td><td>11</td><td>1.87</td></tr><tr><td>78</td><td>went, rushed, pushed, threw</td><td>verb.motion</td><td>22</td><td>1.79</td></tr><tr><td>41</td><td>ever, seen, never, since</td><td>adv.all</td><td>11</td><td>1.75</td></tr><tr><td>21</td><td>five, twenty, three, four</td><td>noun.quantity</td><td>12</td><td>1.71</td></tr><tr><td>139</td><td>press, column, member, distinct</td><td>noun.person</td><td>15</td><td>0.24</td></tr><tr><td>24</td><td>limbs, rage, disappointment, quivering</td><td>noun.feeling</td><td>17</td><td>0.23</td></tr><tr><td>130</td><td>bitter, laugh, cipher, whistle</td><td>noun.communication</td><td>13</td><td>0.23</td></tr><tr><td>89</td><td>using, influence, amazing, custom</td><td>noun.attribute</td><td>13</td><td>0.23</td></tr><tr><td>34</td><td>surface, fingers, cards, soft</td><td>noun.act</td><td>7</td><td>0.21</td></tr><tr><td>71</td><td>less, delay, nearer, foot</td><td>adj.all</td><td>6</td><td>0.20</td></tr><tr><td>28</td><td>mouth, handkerchief, chin, stained</td><td>noun.body</td><td>10</td><td>0.18</td></tr><tr><td>120</td><td>probability, beauty, strangers, immediate</td><td>noun.artifact</td><td>12</td><td>0.18</td></tr></tbody></table></div>
+
+<h2>4. Relations, fringe and hidden truth</h2>
+
+<div class="eq">
+  $$e=\{a,b\}\ \text{is a relation in sentence } s\iff \exists\,p\lt q:\ \{c(w_p),c(w_q)\}=\{a,b\},\ a\ne b,\ q-p\le6$$
+</div>
+<p>
+
+here 
+
+We define {a,b} an unordered pair of relation and c(w_p) and c(w_q) being the context word the selected words and the word spacing considered is 6</p>
+
+<div class="eq">$$S_0=\{e:w^{\mathrm{tr}}_e>0\},\quad \mathcal F=\{e\in S_0:\ w^{\mathrm{tr}}_e\le2\},\quad \mathcal H=\{e:\ w^{\mathrm{hid}}_e>0,\ e\notin S_0,\ e\subseteq\mathrm{known}\},\quad \mathcal T=S_0\cup\mathcal H$$</div>
+
+
+
+<div class="where">
+  <div>For relation e, w_tr(e) and w_hid(e) count sentences in readable and held-out text.</div>
+
+  <div class="eq">$$S_0=\{e:w^{\mathrm{tr}}_e>0\},\qquad \mathcal F=\{e\in S_0:w^{\mathrm{tr}}_e\le2\}$$</div>
+  <div>S0 = real relations: seen at least once in readable text. F = fringe: real relations seen at most twice (FRINGE_PAIR_COUNT), so rare and low-trust.</div>
+
+  <div class="eq">$$\mathrm{known}=\{c:\exists e\in S_0,\ c\subseteq e\}$$</div>
+  <div>Known concepts appear in some real relation, so readable text gives evidence about them.</div>
+
+  <div class="eq">$$\mathcal H=\{e:w^{\mathrm{hid}}_e>0,\ e\notin S_0,\ e\subseteq\mathrm{known}\}$$</div>
+  <div>Hidden truths: absent from readable text, present in held-out text, and linking two known concepts — plausible but uncountable.</div>
+
+  <div class="eq">$$\mathcal T=S_0\cup\mathcal H$$</div>
+  <div>T = everything counted true: real relations plus hidden truths.</div>
+</div>
+
+<div class="eq">$$\pi_0(c)=\frac{n^{\mathrm{tr}}_c}{\sum_{c'}n^{\mathrm{tr}}_{c'}},\qquad m_e=\frac{\bar\mu_a+\bar\mu_b}{\|\bar\mu_a+\bar\mu_b\|}$$</div>
+<ul class="where">
+  <li>We use <b>$\pi_0$</b> as the <b>real concept distribution</b>: how often each concept appears in the readable text, as a share of all content tokens. Here <b>$n^{\mathrm{tr}}_c$</b> is the number of content tokens of concept $c$ in the readable text.</li>
+  <li>We define <b>$m_e$</b> as the <b>meaning vector</b> of relation $e=\{a,b\}$: we take the two concept directions $\bar\mu_a$ and $\bar\mu_b$, average them to get the midpoint, then normalise to unit length. The result is a single direction that represents “$a$ and $b$ together,” which is what we later cluster.</li>
+</ul>
+
+<pre class="out">relations: 9,918 real (3,525 fringe), 399 hidden truths, out of 11,175 possible pairs
+fringe words: 209 of 2,220 content words
+real sentence diversity (mean pairwise cosine distance) = 0.687</pre>
+
+<p>We find that out of $11{,}175$ possible concept pairs, $9{,}918$ occur in the readable text, and $3{,}525$ of those are fringe — so more than a third of the real relations sit right at the edge of the evidence. Only $399$ pairs are hidden truths, which means there is not much for us to find, and what we find is easy to count. The fringe is also small in word terms: just $209$ of $2{,}220$ content words are fringe words, so most content words are backed by plenty of evidence. Finally, the mean pairwise cosine distance of $0.687$ tells us that the real sentences are spread out rather than near-duplicates of each other.</p>
+
+
+
+<div class="answer">
+  <div class="overview">
+    <h3>Overview</h3>
+    <p>The sentence is padded with start and end markers, and every position has an embedding. At each position, the model uses two attention heads: a context head and a previous-token head. These heads, together with the current word embedding, are combined into one query vector. Stored text is turned into keys using the same recipe, so queries can be matched against those keys.</p>
+  </div>
+
+  <div class="context-head">
+    <h3>Context head</h3>
+    <p>The context head lets the current position look back at earlier positions, including itself, but never at future positions. For each allowed earlier position, it computes a score from two things: how similar the embeddings are, scaled by the gain, and a distance penalty that makes farther positions less attractive. Those scores are normalized into attention weights that sum to one over the allowed positions. The context vector is then the attention-weighted average of those earlier embeddings.</p>
+  </div>
+
+  <div class="formula">
+    $$a_{tj}=\mathrm{softmax}_{j\le t}\Big(g\,e_t^{\top}e_j-\lambda\,(t-j)\Big),\qquad c_t=\sum_{j\le t}a_{tj}\,e_j$$
+  </div>
+
+  <div class="context-explanation">
+    <p>In words: the gain is four, so similar words attract attention strongly. The distance penalty is one quarter, so attention fades as distance grows. The resulting context vector summarizes the earlier words that the current position attends to.</p>
+  </div>
+
+  <div class="previous-head">
+    <h3>Previous-token head</h3>
+    <p>The previous-token head is much simpler: it attends only to the immediately previous position and returns that position’s embedding. At the very start it returns zero. This head preserves local word order information.</p>
+  </div>
+
+  <div class="query">
+    <h3>Query construction</h3>
+    <p>The query for the current position is built from three parts joined together: the current word embedding, the previous-token embedding weighted by the previous-token weight, and the normalized context vector weighted by the context weight. A normalizing factor in front makes the final query vector have unit length.</p>
+  </div>
+
+  <div class="formula">
+    $$q_t=\frac{1}{\sqrt{1+w^{2}+\omega^{2}}}\Big[\,e_t\ ;\ w\,e_{t-1}\ ;\ \omega\,\hat c_t\,\Big],\qquad \hat c_t=\frac{c_t}{\|c_t\|}$$
+  </div>
+
+  <div class="query-explanation">
+    <p>In words: the previous-token weight is zero point eight, and the context weight is zero point seven. The context part is first normalized to unit length before it is weighted and joined with the other two parts. The final query is also normalized to unit length.</p>
+  </div>
+
+  <div class="keys">
+    <h3>Stored text as keys</h3>
+    <p>Stored text forms keys using the same construction. So the model builds a query for the current position and compares it with keys built the same way from stored text. This is how the attention-based representation is used for matching or retrieval.</p>
+  </div>
+</div>
+
+
+
+
+<p><b>Training is storage.</b> Every position $i$ of the training sentences becomes a slot $(k_i,v_i,n_i)$. Only the $K=4000$ slots with the largest $n_i$ are kept (ties at random), so rare material is dropped first: this is the model's finite capacity.</p>
+<div class="eq">$$\alpha_i=\mathrm{softmax}_i\big(\beta\,q^{\top}k_i+\gamma\log n_i\big),\qquad o=\sum_i\alpha_i\,v_i,\qquad p(w)=\mathrm{softmax}_w\!\Big(\frac{e_w^{\top}o}{\tau}\Big)$$</div>
+<ul class="where">
+<li><b>$k_i$</b> the stored key (the query computed at training position $i$); <b>$v_i$</b> the embedding of the word that followed.</li>
+<li><b>$n_i$</b> how many training positions share position $i$'s (word, next word) pair; $\gamma\log n_i$ with <b>$\gamma=1$</b> favours common patterns.</li>
+<li><b>$\beta=120$</b> sharpness of the memory read; <b>$\alpha_i$</b> the <b>memory attention weight</b> on slot $i$.</li>
+<li><b>$o$</b> the blended next-word vector. Because it blends several slots, the model can write a word near in meaning to what it stored.</li>
+<li><b>$\tau=0.04$</b> output temperature (<code>TAU_OUT</code>): higher means blurrier, more novel and less accurate. <b>$p(w)$</b> the probability of writing word $w$ next.</li>
+</ul>
+<p>A first look at what generation 0 writes after reading 600 real sentences (the first two lines are real sentences from the corpus):</p>
+<pre class="out">one generation of 600 sentences: 1.5s
+real:      a study in scarlet by a
+real:      contents a study in scarlet
+generated: think not not have been bed behind
+generated: that is the of the great interest
+generated: i think know and your i feel
+generated: maybe think if you shall probably find him a problem delicate as be the of the sympathy of</pre>
+<p>The grammar is rough, but the words are plausible and they are not copied: this is the text that later generations read.</p>
+
+<h2>6. The self-consuming loop</h2>
+<div class="eq">$$n_s=\mathrm{round}(u\,n),\quad n_r=n-n_s,\qquad \mathrm{Train}_t=\underbrace{n_r\ \text{real sentences}}_{\text{drawn at random}}\ \cup\ \underbrace{\mathrm{Pool}_{t-1}[1..n_s]}_{\text{written by generation }t-1}$$</div>
+
+
+<h2>7. The ten variables</h2>
+<div class="tw"><table>
+<tr><th>Symbol</th><th>Name</th><th>Level</th><th>Formula</th></tr>
+<tr><td>$D_t$</td><td>Data seen</td><td>sentence</td><td>$|\mathrm{Seen}_t|/N_R$</td></tr>
+<tr><td>$C_t$</td><td>Capture rate</td><td>word</td><td>$\frac1P\sum_i\mathbf 1\big[y_i\in\mathrm{top5}\,p(\cdot\mid q_i)\big]$</td></tr>
+<tr><td>$R_t$</td><td>Concept retrieval</td><td>concept</td><td>$1-\tfrac12\sum_c|\pi_t(c)-\pi_0(c)|$</td></tr>
+<tr><td>$Q_t$</td><td>Context use (reasoning vs knee-jerk)</td><td>attention</td><td>$\frac1P\sum_i\mathrm{TV}\big(p(\cdot\mid q_i),\,p(\cdot\mid q_i^{\sigma})\big)$</td></tr>
+<tr><td>$F_t$</td><td>Fringe retrieval</td><td>concept</td><td>$|\mathrm{rel}_t\cap\mathcal F|/|\mathcal F|$</td></tr>
+<tr><td>$A_t$</td><td>Fringe accuracy</td><td>word</td><td>$|\mathrm{tail}_t\cap\mathrm{real}|/|\mathrm{tail}_t|$</td></tr>
+<tr><td>$N_t$</td><td>Concept novelty</td><td>concept</td><td>$\sum_{e\in\mathrm{novel}_t}c_t(e)\big/\sum_e c_t(e)$</td></tr>
+<tr><td>$M_t$</td><td>Novelty–fringe proximity</td><td>concept</td><td>$\sum_{e\in\mathrm{novel}_t}c_t(e)\max_{f\in\mathcal F}m_e^{\top}m_f\big/\sum_{e\in\mathrm{novel}_t}c_t(e)$</td></tr>
+<tr><td>$V_t$</td><td>Validated discovery</td><td>concept</td><td>$|\mathrm{rel}_t\cap\mathcal H|/|\mathcal H|$</td></tr>
+<tr><td>$S_t$</td><td>Sentence diversity</td><td>sentence</td><td>$\min\{1,\ \bar d_t/\bar d_{\mathrm{real}}\}$</td></tr>
+</table></div>
+
+
+
+
+
+<div class="answer">
+  <div class="training-data">
+    <h3>Training sentences seen so far</h3>
+    <p><b>Seen<sub>t</sub></b> means all the real training sentences that have been drawn into any training set up to that point. <b>N<sub>R</sub></b> is simply the total number of real training sentences.</p>
+  </div>
+
+  <div class="probes">
+    <h3>Probe positions</h3>
+    <p><b>P = 300</b> is the number of probe positions taken from the model’s own training text. For each probe position <b>i</b>, the query built there is <b>q<sub>i</sub></b>. The word that actually came next is <b>y<sub>i</sub></b>. <b>top5</b> means the five next words the model thinks are most likely.</p>
+  </div>
+
+  <div class="swapped-context">
+    <h3>Probe with swapped context</h3>
+    <p><b>q<sub>i</sub><sup>σ</sup></b> is probe <b>i</b> after its context part has been replaced by the context part of another random probe, called <b>σ(i)</b>. This is used to test whether the model really pays attention to the attended context.</p>
+  </div>
+
+  <div class="formula">
+    TV(p, p') = ½ Σ<sub>w</sub> |p(w) − p'(w)|
+  </div>
+
+  <div class="total-variation">
+    <h3>Total variation</h3>
+    <p><b>TV</b> is total variation. It is a number between zero and one that measures how different two next-word probability distributions are. If <b>Q<sub>t</sub> = 0</b>, the model is ignoring the attended context.</p>
+  </div>
+
+  <div class="pool-concept">
+    <h3>Concept distribution of the pool</h3>
+    <p><b>π<sub>t</sub></b> is the concept distribution of <b>Pool<sub>t</sub></b>, using the same definition as <b>π<sub>0</sub></b>. In plain terms, it describes how concepts are spread across the current pool.</p>
+  </div>
+
+  <div class="relations">
+    <h3>Relations in the pool</h3>
+    <p><b>rel<sub>t</sub></b> means the relations present in <b>Pool<sub>t</sub></b>. <b>c<sub>t</sub>(e)</b> is how often relation <b>e</b> occurs there. <b>novel<sub>t</sub></b> means the relations that were never seen in the original training data.</p>
+  </div>
+
+  <div class="tail-and-real">
+    <h3>Tail pairs and real pairs</h3>
+    <p><b>tail<sub>t</sub></b> means the word-pair types in <b>Pool<sub>t</sub></b> whose count is at or below the median count. So these are the less frequent word pairs. <b>real</b> means word pairs that actually occur in the real text, whether that text is readable or held out.</p>
+  </div>
+
+  <div class="novel-fringe">
+    <h3>Novel and fringe meaning vectors</h3>
+    <p><b>m<sub>e</sub></b> and <b>m<sub>f</sub></b> are meaning vectors for a novel relation and a fringe relation. A fringe relation is a rare or marginal relation. <b>M<sub>t</sub></b> is high when new claims are close to rare knowledge.</p>
+  </div>
+
+  <div class="earlier-definitions">
+    <h3>Earlier definitions</h3>
+    <p><b>F</b> and <b>H</b> are used exactly as they were defined in section 4.</p>
+  </div>
+</div>
+
+
+<p>Sentence diversity uses attention pooling of a sentence's content words:</p>
+<div class="eq">$$b_i=\mathrm{softmax}_i\!\Big(\frac{e_i^{\top}\bar e}{0.25}\Big),\qquad v_s=\frac{\sum_i b_i\,e_i}{\big\|\sum_i b_i\,e_i\big\|},\qquad \bar d=\mathbb E\big[\,1-v_s^{\top}v_{s'}\,\big]$$</div>
+<ul class="where">
+<li><b>$i$</b> a content word of the sentence; <b>$\bar e$</b> the normalised mean of their embeddings (the sentence's overall meaning).</li>
+<li><b>$b_i$</b> the <b>pooling weight</b>: words closest to the sentence's meaning count most. <b>$v_s$</b> the <b>sentence vector</b>.</li>
+<li><b>$\bar d$</b> mean cosine distance between two random sentences' vectors ($3000$ pairs); <b>$\bar d_t$</b> for $\mathrm{Pool}_t$ and <b>$\bar d_{\mathrm{real}}$</b> for real text. Low $S_t$ means the model keeps writing the same kind of sentence.</li>
+</ul>
+
+<h2>Generating 12 synthetic generations </h2>
+<h3>The ten variables over the generations</h3>
+<p>Mean state of the ten variables, generation 0 → generation 12, for every synthetic share $u$ that was run we run it about 4 times.</p>
+<div class="tw"><table class="num"><thead><tr><th>u (synthetic share)</th><th>D</th><th>C</th><th>R</th><th>Q</th><th>F</th><th>A</th><th>N</th><th>M</th><th>V</th><th>S</th></tr></thead><tbody><tr><td>0.00</td><td>0.04 → 0.43</td><td>0.42 → 0.41</td><td>0.58 → 0.56</td><td>0.16 → 0.18</td><td>0.04 → 0.02</td><td>0.41 → 0.44</td><td>0.02 → 0.02</td><td>0.87 → 0.87</td><td>0.03 → 0.02</td><td>0.81 → 0.84</td></tr><tr><td>0.10</td><td>0.04 → 0.40</td><td>0.41 → 0.41</td><td>0.55 → 0.35</td><td>0.16 → 0.18</td><td>0.03 → 0.01</td><td>0.44 → 0.48</td><td>0.02 → 0.02</td><td>0.87 → 0.86</td><td>0.02 → 0.01</td><td>0.86 → 0.74</td></tr><tr><td>0.25</td><td>0.04 → 0.35</td><td>0.44 → 0.48</td><td>0.57 → 0.20</td><td>0.17 → 0.16</td><td>0.04 → 0.00</td><td>0.42 → 0.50</td><td>0.03 → 0.00</td><td>0.87 → 0.65</td><td>0.03 → 0.00</td><td>0.82 → 0.39</td></tr><tr><td>0.40</td><td>0.04 → 0.30</td><td>0.41 → 0.56</td><td>0.55 → 0.12</td><td>0.17 → 0.13</td><td>0.03 → 0.00</td><td>0.43 → 0.48</td><td>0.05 → 0.01</td><td>0.88 → 0.43</td><td>0.03 → 0.00</td><td>0.82 → 0.28</td></tr><tr><td>0.50</td><td>0.04 → 0.26</td><td>0.44 → 0.59</td><td>0.56 → 0.13</td><td>0.15 → 0.10</td><td>0.03 → 0.00</td><td>0.45 → 0.40</td><td>0.02 → 0.00</td><td>0.87 → 0.64</td><td>0.02 → 0.00</td><td>0.81 → 0.19</td></tr><tr><td>0.60</td><td>0.04 → 0.22</td><td>0.43 → 0.62</td><td>0.53 → 0.13</td><td>0.17 → 0.13</td><td>0.02 → 0.00</td><td>0.43 → 0.44</td><td>0.01 → 0.00</td><td>0.87 → 0.43</td><td>0.02 → 0.00</td><td>0.83 → 0.22</td></tr><tr><td>0.75</td><td>0.04 → 0.16</td><td>0.43 → 0.80</td><td>0.56 → 0.15</td><td>0.17 → 0.07</td><td>0.03 → 0.00</td><td>0.42 → 0.50</td><td>0.02 → 0.00</td><td>0.86 → 0.00</td><td>0.01 → 0.00</td><td>0.83 → 0.36</td></tr><tr><td>0.90</td><td>0.04 → 0.09</td><td>0.43 → 0.92</td><td>0.55 → 0.14</td><td>0.17 → 0.02</td><td>0.03 → 0.00</td><td>0.43 → 0.33</td><td>0.02 → 0.02</td><td>0.87 → 0.42</td><td>0.02 → 0.00</td><td>0.80 → 0.38</td></tr><tr><td>0.95</td><td>0.04 → 0.07</td><td>0.43 → 0.92</td><td>0.57 → 0.06</td><td>0.17 → 0.02</td><td>0.03 → 0.00</td><td>0.42 → 0.24</td><td>0.02 → 0.04</td><td>0.87 → 0.22</td><td>0.03 → 0.00</td><td>0.82 → 0.15</td></tr><tr><td>1.00</td><td>0.04 → 0.04</td><td>0.40 → 0.91</td><td>0.53 → 0.10</td><td>0.17 → 0.00</td><td>0.03 → 0.00</td><td>0.43 → 0.36</td><td>0.02 → 0.00</td><td>0.87 → 0.00</td><td>0.02 → 0.00</td><td>0.87 → 0.37</td></tr></tbody></table></div>
+<figure class="figure wide w-100 text-center">
+<a href="08-ten-variables-by-generation.png" class="d-block" target="_blank" rel="noopener"><img src="08-ten-variables-by-generation.png" alt="Ten panels, one per state variable, over 12 generations" width="1972" height="777" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">The ten variables over the generations. Each line is a synthetic share $u$ (green $u=0$ to pink $u=1$); line = mean of 4 runs, band = ±1 standard deviation.</figcaption>
+</figure>
+
+
+
+<div class="answer">
+  <div class="trend-capture">
+    <h3>C: capture goes up when things go wrong</h3>
+    <p>As <b>u</b> becomes large, <b>C</b> rises strongly. This means the model becomes better at predicting its own text. The reason is that the model’s text has become simple, so it is easy for the model to reproduce it.</p>
+  </div>
+
+  <div class="trend-retrieval">
+    <h3>R: concept retrieval falls even for a small share</h3>
+    <p><b>R</b> drops as soon as <b>u</b> becomes even slightly positive, and it falls sharply. For larger values of <b>u</b>, it stays low. So concept retrieval is fragile: it does not need much of the bad condition before it breaks down.</p>
+  </div>
+
+  <div class="trend-query">
+    <h3>Q: context use disappears at the extreme</h3>
+    <p>At the highest value of <b>u</b>, <b>Q</b> drops to nothing. That means the next word is decided by the last word alone. This is the knee-jerk reaction of the blog: no real use of attended context.</p>
+  </div>
+
+  <div class="trend-fringe-validated">
+    <h3>F and V: fringe relations and validated discoveries vanish</h3>
+    <p>Once <b>u</b> is moderate or higher, both <b>F</b> and <b>V</b> disappear completely. Even when <b>u</b> is at its lowest, the fringe is already cut down. So the model loses rare or marginal knowledge and stops producing validated discoveries.</p>
+  </div>
+
+  <div class="trend-s">
+    <h3>S: falls, but not in order of u</h3>
+    <p><b>S</b> falls overall, but its level does not line up cleanly with <b>u</b>. For moderate and high values of <b>u</b>, it ends low. When <b>u</b> is at its lowest, it stays high. There are too few runs to rank the middle conditions reliably.</p>
+  </div>
+
+  <div class="trend-d">
+    <h3>D: only grows when real text keeps coming</h3>
+    <p><b>D</b> grows only when real text keeps arriving. It is high when <b>u</b> is at its lowest and stays low when <b>u</b> is at its highest. So discovery depends on continued exposure to real text, not on the model feeding on its own simplified output.</p>
+  </div>
+</div>
+
+
+
+
+<h3>Words and sentences</h3>
+<p>Two sentences per generation from the first run, with no synthetic text ($u=0$) and with only synthetic text ($u=1$):</p>
+<pre class="out">=== u = 0 (real text only) ===
+  gen  0: think not not have been bed behind
+  gen  0: that is the of the great interest
+  gen  6: i think that anything yes
+  gen  6: i never have left the remember the object of his bold
+  gen 12: really think have made a very beautiful watson
+  gen 12: know well we shall help it
+
+=== u = 1 (synthetic share) ===
+  gen  0: i did not that beg have take the of the holmes on the curve also he at last
+  gen  0: you have was such a thing in my life before
+  gen  6: i have been here
+  gen  6: i have been here
+  gen 12: i have been here
+  gen 12: believe have been here
+
+concepts that fade most at u=1:</pre>
+<p>Without the loop the model keeps writing varied, if clumsy, sentences. With the loop, by generation 6 it writes the same sentence again and again.</p>
+
+<h3>Concepts</h3>
+<p>At $u=1$, the concepts that fade most (all start above $0.2\%$ of the text and end at zero) and the ones that take over:</p>
+<div class="tw"><table class=""><thead><tr><th>concept</th><th>meaning (nearest words)</th><th>WordNet</th><th>share gen 0 %</th><th>share gen 12 %</th></tr></thead><tbody><tr><td>0</td><td>certainly, case, unusual, unique</td><td>adj.all</td><td>0.39</td><td>0.0</td></tr><tr><td>3</td><td>aloud, shrugged, laughed, heartily</td><td>noun.person</td><td>0.22</td><td>0.0</td></tr><tr><td>5</td><td>certain, obvious, fact, point</td><td>adj.all</td><td>1.89</td><td>0.0</td></tr><tr><td>4</td><td>heart, nerves, learned, methods</td><td>noun.cognition</td><td>0.45</td><td>0.0</td></tr><tr><td>6</td><td>months, ago, weeks, days</td><td>noun.time</td><td>0.22</td><td>0.0</td></tr><tr><td>11</td><td>cause, quarrel, result, stage</td><td>noun.communication</td><td>1.58</td><td>0.0</td></tr><tr><td>9</td><td>remark, draw, machine, mercy</td><td>noun.act</td><td>0.30</td><td>0.0</td></tr><tr><td>8</td><td>large, small, square, short</td><td>noun.artifact</td><td>1.04</td><td>0.0</td></tr><tr><td>15</td><td>got, shot, tried, away</td><td>verb.possession</td><td>0.40</td><td>0.0</td></tr><tr><td>27</td><td>walked, along, path, across</td><td>noun.artifact</td><td>0.26</td><td>0.0</td></tr></tbody></table></div>
+<div class="tw"><table class=""><thead><tr><th>concept</th><th>meaning (nearest words)</th><th>WordNet</th><th>share gen 0 %</th><th>share gen 12 %</th></tr></thead><tbody><tr><td>35</td><td>discovery, sounds, peculiar, motive</td><td>noun.communication</td><td>0.41</td><td>4.81</td></tr><tr><td>46</td><td>feel, believe, understand, dare</td><td>noun.communication</td><td>2.40</td><td>8.16</td></tr><tr><td>2</td><td>observe, thank, beg, maybe</td><td>verb.communication</td><td>0.95</td><td>3.19</td></tr><tr><td>80</td><td>think, say, know, help</td><td>noun.cognition</td><td>22.57</td><td>71.57</td></tr><tr><td>90</td><td>serious, important, indeed, delicate</td><td>adj.all</td><td>1.59</td><td>4.81</td></tr><tr><td>23</td><td>wanted, guess, hell, gather</td><td>adj.all</td><td>0.35</td><td>0.52</td></tr></tbody></table></div>
+<p> The loop does not remove ideas at random: it removes the ones the model rarely wrote and feeds the ones it already over-used.</p>
+
+<h3>Attention</h3>
+<figure class="figure w-100 text-center">
+<a href="09-attention-maps-real-vs-collapsed.png" class="d-block" target="_blank" rel="noopener"><img src="09-attention-maps-real-vs-collapsed.png" alt="Attention maps of the context head" width="1272" height="597" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Context head on a real sentence (left) and on a generation-12 sentence at $u=1$ (right). Row = word, column = word it attends to.</figcaption>
+</figure>
+<div class="tw"><table class="num"><thead><tr><th>diagnostic</th><th>u=0, gen 0</th><th>u=0, gen 12</th><th>u=1, gen 0</th><th>u=1, gen 12</th></tr></thead><tbody><tr><td>surface_novelty</td><td>0.539</td><td>0.516</td><td>0.562</td><td>0.554</td></tr><tr><td>copy_rate</td><td>0.005</td><td>0.011</td><td>0.005</td><td>0.000</td></tr><tr><td>n_novel_rel</td><td>29.250</td><td>22.250</td><td>24.500</td><td>0.000</td></tr><tr><td>n_hidden_found</td><td>10.500</td><td>9.750</td><td>8.500</td><td>0.000</td></tr><tr><td>vocab_cover</td><td>0.203</td><td>0.176</td><td>0.175</td><td>0.016</td></tr><tr><td>fringe_word_cover</td><td>0.083</td><td>0.061</td><td>0.059</td><td>0.000</td></tr><tr><td>mean_len</td><td>10.208</td><td>9.673</td><td>9.249</td><td>11.592</td></tr><tr><td>attn_entropy</td><td>0.424</td><td>0.413</td><td>0.419</td><td>0.577</td></tr></tbody></table></div>
+
+
+
+<div class="answer">
+  <div class="collapse-at-extreme">
+    <h3>At the extreme, the model finds nothing new</h3>
+    <p>When the bad condition is at its maximum, the model eventually finds <b>no novel relation</b> and <b>no hidden truth</b> by late generations. Its content vocabulary also shrinks dramatically: it uses only a tiny fraction of the content words it used at the beginning. So the model is not just failing to discover anything new; it is also saying much less overall.</p>
+  </div>
+
+  <div class="copying-not-cause">
+    <h3>Copying real sentences is not the cause</h3>
+    <p>The collapse is not explained by the model simply copying real sentences. The rate of verbatim copying stays very low throughout. So even though the model’s output becomes poor and repetitive in meaning, it is not because it is directly parroting the real text.</p>
+  </div>
+
+  <div class="surface-novelty">
+    <h3>New wording alone cannot tell creativity from collapse</h3>
+    <p>Surface novelty, meaning new word trigrams, stays at a moderate level even when the model has collapsed. In other words, the model can keep producing new-looking word combinations while its deeper content has fallen apart. So new wording by itself is not a reliable sign of creativity; it can also appear during collapse.</p>
+  </div>
+</div>
+
+<h2>9. The dynamical system</h2>
+<div class="eq">$$z=\frac{x-\mu}{\sigma},\qquad \tilde u=\frac{u-\bar u}{s_u},\qquad z_{t+1}=z_t+\Theta(z_t,\tilde u)\,\Xi,\qquad \Theta=\big[\,1,\ z,\ \tilde u,\ z\,\tilde u,\ \tilde u^{2}\,\big]$$</div>
+
+
+
+<div class="symbol-name-list">
+  <ul>
+    <li><strong>$x$</strong> — state vector</li>
+    <li><strong>$\mu$</strong> — mean</li>
+    <li><strong>$\sigma$</strong> — standard deviation</li>
+    <li><strong>$z$</strong> — standardised state</li>
+    <li><strong>$\bar u$</strong> — mean synthetic share</li>
+    <li><strong>$s_u$</strong> — standard deviation of synthetic shares</li>
+    <li><strong>$\tilde u$</strong> — standardised control</li>
+    <li><strong>$\Theta$</strong> — library</li>
+    <li><strong>$\Xi$</strong> — coefficient matrix</li>
+    <li><strong>$z_{t+1}-z_t$</strong> — generation change</li>
+  </ul>
+</div>
+
+
+
+
+
+<div class="eq">$$w_{\mathcal S}=\big(\tilde\Theta_{\mathcal S}^{\top}\tilde\Theta_{\mathcal S}+\alpha\,m\,I\big)^{-1}\tilde\Theta_{\mathcal S}^{\top}Y_{\cdot k},\qquad \text{drop term }j\text{ if }|w_j|<\theta\,\max_{j'}|w^{(0)}_{j'}|$$</div>
+<ul class="where">
+<li><b>$\mathcal S$</b> the active (kept) terms; <b>$\tilde\Theta$</b> the library with columns scaled to unit rms; <b>$m$</b> number of training rows.</li>
+<li><b>$Y_{\cdot k}$</b> the one-generation changes of variable $k$; <b>$\alpha\in\{0.01,0.1,1\}$</b> ridge strength; <b>$I$</b> the identity matrix.</li>
+<li><b>$w^{(0)}$</b> the first fit with all terms; <b>$\theta\in\{0.05,\dots,0.60\}$</b> the relative threshold. Fitting and dropping repeat until the set stops changing. An equation explaining under $1\%$ of the change is set to zero.</li>
+</ul>
+
+<h3>What the fit found</h3>
+<p>All 18 combinations of ridge strength and threshold were fitted. The one chosen on the validation shares has $21$ active terms out of $230$, no clipped step, and a <b>negative</b> one-step test skill ($-0.26$): it is worse than "nothing changes" for predicting a single generation, and is meant only for the long trend.</p>
+<details><summary>All 18 fits that were tried</summary><div class="tw"><table class="num"><thead><tr><th>ridge α</th><th>threshold θ</th><th>terms</th><th>test one-step skill</th><th>validation free-run MSE</th><th>clipped steps</th></tr></thead><tbody><tr><td>0.01</td><td>0.05</td><td>164</td><td>-0.959</td><td>0.175</td><td>4</td></tr><tr><td>0.01</td><td>0.1</td><td>128</td><td>-0.905</td><td>0.172</td><td>5</td></tr><tr><td>0.01</td><td>0.2</td><td>60</td><td>-0.784</td><td>0.166</td><td>14</td></tr><tr><td>0.01</td><td>0.3</td><td>36</td><td>-0.373</td><td>0.193</td><td>14</td></tr><tr><td>0.01</td><td>0.45</td><td>19</td><td>-0.420</td><td>0.736</td><td>14</td></tr><tr><td>0.01</td><td>0.6</td><td>11</td><td>-0.393</td><td>1.397</td><td>0</td></tr><tr><td>0.1</td><td>0.05</td><td>166</td><td>-0.674</td><td>0.166</td><td>5</td></tr><tr><td>0.1</td><td>0.1</td><td>126</td><td>-0.637</td><td>0.166</td><td>6</td></tr><tr><td>0.1</td><td>0.2</td><td>71</td><td>-0.458</td><td>0.164</td><td>12</td></tr><tr><td>0.1</td><td>0.3</td><td>46</td><td>-0.260</td><td>0.174</td><td>12</td></tr><tr class="sel"><td>0.1</td><td>0.45</td><td>21</td><td>-0.264</td><td>0.365</td><td>0</td></tr><tr><td>0.1</td><td>0.6</td><td>10</td><td>-0.424</td><td>1.334</td><td>0</td></tr><tr><td>1.0</td><td>0.05</td><td>179</td><td>-0.150</td><td>0.346</td><td>4</td></tr><tr><td>1.0</td><td>0.1</td><td>143</td><td>-0.140</td><td>0.348</td><td>5</td></tr><tr><td>1.0</td><td>0.2</td><td>87</td><td>-0.116</td><td>0.382</td><td>4</td></tr><tr><td>1.0</td><td>0.3</td><td>54</td><td>-0.064</td><td>0.425</td><td>0</td></tr><tr><td>1.0</td><td>0.45</td><td>33</td><td>-0.104</td><td>0.620</td><td>0</td></tr><tr><td>1.0</td><td>0.6</td><td>22</td><td>-0.095</td><td>0.789</td><td>0</td></tr></tbody></table></div></details>
+<p>The discovered dynamics, in z-scored units ($u$ is the standardised synthetic share):</p>
+<div class="eq">$$\begin{aligned}
+\Delta D&=+0.146 \\
+\Delta C&=+0.260\,u-0.245\,C+0.072\,u^{2} \\
+\Delta R&=-0.235\,R-0.186\,u-0.130 \\
+\Delta Q&=-0.277\,Q-0.273\,u \\
+\Delta F&=-0.481\,F-0.268-0.236\,u-0.226\,R\,u \\
+\Delta A&=-0.249\,A \\
+\Delta N&=-0.501\,N-0.328\,N\,u \\
+\Delta M&=-0.278\,M \\
+\Delta V&=-0.339\,V \\
+\Delta S&=+0.121\,D-0.102\,M-0.101
+\end{aligned}$$</div>
+<ul>
+<li>$D$ grows by a constant, as designed. $C$ is pushed up by $u$, while $R$, $Q$ and $F$ are pushed down by it; $F$ also falls faster when $R$ is high and $u$ is large.</li>
+<li>$A$, $M$ and $V$ get no $u$ term: they only relax. In z-units a term like $-0.249\,A$ pulls $A$ back towards the average of the training runs by about a quarter each generation. It is a relaxation, not a claim that $A$ goes to zero.</li>
+<li>$N$ decays, and decays faster when $u$ is large. $S$ rises with $D$ and falls with $M$.</li>
+</ul>
+<figure class="figure wide w-100 text-center">
+<a href="10-sindy-active-terms.png" class="d-block" target="_blank" rel="noopener"><img src="10-sindy-active-terms.png" alt="Heat map of the active terms of the fitted system" width="1531" height="520" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Active terms of the fitted system. Rows are equations, columns are terms; red pushes the variable up, blue pushes it down.</figcaption>
+</figure>
+
+<div class="eq">$$\mathrm{MSE}_{\mathrm{fr}}=\frac1{|\mathcal V|}\sum_{u\in\mathcal V}\frac1{(T+1)K}\sum_{t=0}^{T}\big\|\hat z_t(u)-\bar z_t(u)\big\|^{2},\qquad \mathrm{skill}_{k}=1-\frac{\sum_t(\hat z_{t,k}-\bar z_{t,k})^2}{\sum_t(\bar z_{0,k}-\bar z_{t,k})^2}$$</div>
+<ul class="where">
+<li><b>$\hat z_t(u)$</b> the fitted system <b>free-run</b> from the generation-0 state (no correction); states beyond $\pm6$ are clipped and counted.</li>
+<li><b>$\bar z_t(u)$</b> the average real trajectory at share $u$; <b>$\mathcal V$</b> the validation shares $\{0.4,0.9\}$; <b>$T=12$</b> generations; <b>$K=10$</b> variables.</li>
+<li><b>$\mathrm{skill}_k$</b> for variable $k$ on test shares $\{0.1,0.6,0.95\}$: $1$ perfect, $0$ no better than "nothing changes", negative worse.</li>
+<li>Models are ranked by fewest clipped steps (including a $36$-generation stability run), then lowest $\mathrm{MSE}_{\mathrm{fr}}$, then the sparsest within $10\%$ of the best.</li>
+</ul>
+
+<h3>Does it predict unseen mixtures?</h3>
+<p>Free-run from the generation-0 state on shares used neither to fit nor to tune. Dots are the real mean trajectories, lines are the fitted system.</p>
+<figure class="figure wide w-100 text-center">
+<a href="11-free-run-vs-real-unseen-shares.png" class="d-block" target="_blank" rel="noopener"><img src="11-free-run-vs-real-unseen-shares.png" alt="Fitted system versus real trajectories on unseen shares" width="1958" height="762" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Fitted system (lines) against the real mean trajectories (dots) at $u=0.1$, $0.6$ and $0.95$.</figcaption>
+</figure>
+<p>Free-run error against "nothing changes" (persistence), in z-units; lower is better:</p>
+<div class="tw"><table class="num"><thead><tr><th>u</th><th>SINDy MSE</th><th>persistence MSE</th><th>skill</th><th>clipped steps</th></tr></thead><tbody><tr><td>0.10</td><td>0.295</td><td>0.847</td><td>+0.65</td><td>0</td></tr><tr><td>0.60</td><td>0.254</td><td>1.771</td><td>+0.86</td><td>0</td></tr><tr><td>0.95</td><td>0.927</td><td>3.695</td><td>+0.75</td><td>0</td></tr></tbody></table></div>
+<p>Per-variable free-run skill. "flat" means the variable barely moves at that share:</p>
+<div class="tw"><table class="num"><thead><tr><th>u</th><th>D</th><th>C</th><th>R</th><th>Q</th><th>F</th><th>A</th><th>N</th><th>M</th><th>V</th><th>S</th></tr></thead><tbody><tr><td>0.10</td><td>+0.75</td><td>flat</td><td>+0.97</td><td>flat</td><td>+0.87</td><td>flat</td><td>flat</td><td>flat</td><td>+0.93</td><td>-14.01</td></tr><tr><td>0.60</td><td>+1.00</td><td>+0.97</td><td>+0.93</td><td>+0.74</td><td>+0.99</td><td>-0.05</td><td>+0.42</td><td>+0.62</td><td>+0.78</td><td>+0.88</td></tr><tr><td>0.95</td><td>flat</td><td>+0.98</td><td>+0.96</td><td>+0.96</td><td>+0.99</td><td>-0.19</td><td>-0.84</td><td>+0.72</td><td>+0.87</td><td>+0.81</td></tr></tbody></table></div>
+<ul>
+<li>The system beats persistence at every unseen share (skill $+0.65$, $+0.86$, $+0.75$) with no clipped step.</li>
+<li>It is good for $D$, $C$, $R$, $Q$, $F$, $V$ and $M$ wherever they move, and for $S$ at $u=0.6$ and $0.95$.</li>
+<li>It is weak for $A$ and $N$, which have no useful dynamics here. The $-14.01$ for $S$ at $u=0.1$ is a small-denominator effect: $S$ hardly moves at that share.</li>
+</ul>
+
+
+<h2>10. Sweeps</h2>
+<div class="eq">$$\mathrm{Retention}(u)=\frac{\bar F_T(u)}{\bar F_0(u)},\qquad \mathrm{Yield}=\frac{|\mathrm{rel}_T\cap\mathcal H|}{|\mathrm{novel}_T|}$$</div>
+<ul class="where">
+<li><b>$\bar F_t(u)$</b> the mean fringe retrieval at share $u$ and generation $t$; <b>Retention</b> is the share of the generation-0 fringe left after $T$ generations.</li>
+<li><b>Yield</b> proved relations per new relation written, computed while the output temperature $\tau$ is varied over $\{0.02,0.03,0.04,0.06,0.09\}$ at $u=0.5$.</li>
+</ul>
+
+<h3>Sweep A: the share of synthetic text</h3>
+<figure class="figure wide w-100 text-center">
+<a href="12-sweep-synthetic-share.png" class="d-block" target="_blank" rel="noopener"><img src="12-sweep-synthetic-share.png" alt="Fringe, other variables and copying versus synthetic share" width="1862" height="465" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Left: fringe still present after 12 generations, relative to generation 0. Middle: other variables at generation 12. Right: verbatim copying against new wording.</figcaption>
+</figure>
+<p>The notebook's own answer: <code>largest synthetic share keeping ≥ 50% of the generation-0 fringe relations: 0.00</code></p>
+<p>In other words, only $u=0$ keeps half of the generation-0 fringe. Any synthetic share at all costs rare relations and rare words.</p>
+
+<h3>Sweep B: output temperature at $u=0.5$</h3>
+<figure class="figure wide w-100 text-center">
+<a href="13-sweep-output-temperature.png" class="d-block" target="_blank" rel="noopener"><img src="13-sweep-output-temperature.png" alt="Final state, claims versus proved claims, and yield against temperature" width="1862" height="465" class="figure-img img-fluid rounded border w-100 h-auto" loading="lazy"></a>
+<figcaption class="figure-caption text-center">Output temperature $\tau$ at $u=0.5$: final state (left), novel relations written and how many are proved true (middle), and yield (right).</figcaption>
+</figure>
+<ul>
+<li>Below $\tau=0.04$ the model writes no novel relation at all, and its sentences collapse ($S\approx0$ at $\tau=0.02$).</li>
+<li>At $\tau=0.09$ it writes about $485$ novel relations and about $160$ of them turn up in the hidden text, a yield of about $0.33$. In exchange fringe accuracy $A$ falls from about $0.7$ to $0.13$.</li>
+<li><b>A caution.</b> Outside the $9{,}918$ real relations there are only $11{,}175-9{,}918=1{,}257$ possible pairs, and $399$ of them are hidden truths. Writing never-seen pairs at random would already give a yield of about $399/1{,}257\approx0.32$ (my back-of-the-envelope baseline, not a notebook output). A yield of $0.33$ to $0.38$ is therefore not clearly better than chance.</li>
+</ul>
+
+<div class="answer">
+  <h2>Results</h2>
+
+
+  <div class="collapse">
+    <h3>Collapse at the full synthetic share</h3>
+    <p>When all training text was model-written, the model collapsed. Its use of attended context fell to zero. Concept retrieval dropped from about half to about one tenth. Fringe relations and validated discoveries disappeared. Stability fell by more than half. At the same time, capture rose from about four tenths to about nine tenths. The model ended up writing the same short sentence again and again, and one concept grew from about a fifth to about seven tenths of the concept words it wrote.</p>
+  </div>
+
+  <div class="zero-share">
+    <h3>At zero synthetic share</h3>
+    <p>The run was stable except for discovery, which accumulates by design, and fringe, which halved. Only the zero-synthetic run kept half of the fringe relations it started with.</p>
+  </div>
+
+  <div class="fitted-system">
+    <h3>The fitted long-run system</h3>
+    <p>The fitted system used twenty-one of two hundred thirty possible terms, never hit clipping, and beat “nothing changes” on unseen shares. Its free-run skill was good at the low, middle, and high unseen shares. But its one-generation prediction was worse than “nothing changes,” so it is meant for long trends, not next-step forecasts. It tracked discovery, retrieval, fringe, validation, capture, and context use well. It was weak for novelty and relaxation.</p>
+  </div>
+
+  <div class="novelty">
+    <h3>Novelty</h3>
+    <p>Raising the temperature produced more novel relations and more proved relations. But the share that was proved stayed close to what random guessing would give, and fringe accuracy got worse.</p>
+  </div>
+
+</div>
+
+<h2> Conculsion</h2>
+<p> Although we were able to model it for a simple toy model this did not answer key several questions like what if we take an large scale model? what if the data is extremely large and what are consequences of using an update mechanism that updates the whole weights during the training regime. Although this is a toy model with severly limited data we were able to observe the trend for the variable changes. In future I hope to narrow down the conepts to exclusively human values and see how the dyanmics play out in perhaps some large model like llama series with a bit more data. </p>
+
+</main>
+<script>
+document.addEventListener('click',function(e){if(!e.target.closest('.term'))document.querySelectorAll('.term.open').forEach(function(t){t.classList.remove('open')})});
+</script>
+</body>
+</html>

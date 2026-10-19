@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concepts on the Fringe: Every Formula, Variable by Variable</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+body{margin:0;padding:20px;background:#000;color:#eee;font-family:'Kalam',cursive,sans-serif;font-size:1.1rem;line-height:1.7}
+main{max-width:800px;margin:0 auto;padding:0 10px}
+h1,h2,h3{font-weight:400;margin:2em 0 .5em;line-height:1.3}
+h1{font-size:2rem}h2{font-size:1.6rem;border-bottom:1px solid #333;padding-bottom:.2em}h3{font-size:1.3rem}
+hr{border:0;border-top:1px solid #333;margin:2em 0}
+a{color:#8ab4f8}
+img{max-width:100%;border:1px solid #444;margin:1em 0;display:block;border-radius:4px}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.def{border:1px solid #444;border-left:4px solid #8ab4f8;border-radius:4px;background:#1a1a1a;padding:4px 16px;margin:1.2em 0}
+.def b.t{display:block;font-weight:700;margin-top:8px}
+.term{position:relative;border-bottom:1px dashed #8ab4f8;color:#8ab4f8;cursor:pointer}
+.pop{display:none;position:absolute;left:0;top:1.6em;z-index:50;width:min(480px,86vw);background:#111;color:#eee;border:1px solid #555;border-radius:4px;padding:8px 14px;font-size:.9rem;line-height:1.5;box-shadow:0 4px 18px #000a;cursor:default}
+.term:hover .pop,.term:focus .pop,.term.open .pop{display:block}
+.toggle-btn{position:fixed;top:20px;right:20px;background:#333;color:#eee;border:1px solid #555;padding:6px 14px;border-radius:4px;cursor:pointer;font-family:'Kalam',cursive;z-index:999}
+body.light{background:#fff;color:#222}
+body.light a,body.light .term{color:#1a0dab;border-color:#1a0dab}
+body.light img,body.light .def{border-color:#ccc}
+body.light .def{background:#f5f5f5;border-left-color:#1a0dab}
+body.light .pop{background:#fff;color:#222;border-color:#ccc;box-shadow:0 4px 18px #0003}
+body.light hr,body.light h2{border-color:#ddd}
+body.light .toggle-btn{background:#eee;color:#222;border-color:#ccc}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;margin:1.5em 0;width:100%;font-size:.95rem}
+th,td{border:1px solid #444;padding:8px 10px;text-align:left}
+th{background:#1a1a1a;font-weight:400}
+body.light th{background:#eee}body.light th,body.light td{border-color:#ccc}
+@media(max-width:640px){body{padding:10px;font-size:.95rem;line-height:1.6}main{padding:0 4px}h1{font-size:1.5rem}h2{font-size:1.3rem}h3{font-size:1.1rem}.toggle-btn{top:10px;right:10px;padding:5px 12px;font-size:.85rem}}
+.eq{overflow-x:auto;overflow-y:hidden;margin:.5em 0;max-width:100%}
+.where{list-style:none;margin:.3em 0 1.4em;padding:.2em 0 .2em 1em;border-left:2px solid #333;font-size:.93rem;color:#cfcfcf;line-height:1.55}
+.where::before{content:"where";display:block;color:#8ab4f8;font-size:.82rem}
+.where li{margin:.2em 0}
+body.light .where{border-color:#ccc;color:#333}body.light .where::before{color:#1a0dab}
+</style>
+</head>
+<body>
+<button class="toggle-btn" onclick="document.body.classList.toggle('light')">Toggle theme</button>
+<main>
+<h1>Concepts on the Fringe: Every Formula in the Notebook, Variable by Variable</h1>
+
+<p>This page explains <code>concept_attention_dynamics.ipynb</code>. Every formula is followed by a <b>where</b> list that names each symbol and says what it is in the notebook. Settings are the notebook defaults: $600$ sentences per generation, $12$ generations, $4$ runs per condition.</p>
+
+<h2>1. What the notebook does</h2>
+<ol>
+<li>Reads the Sherlock books: the first $80\%$ of each is <b>readable</b>, the last $20\%$ is <b>held out</b>.</li>
+<li>Turns words into vectors, then groups common words into $150$ <b>concepts</b>.</li>
+<li>Defines <b>relations</b> between concepts, the <b>fringe</b> (rare relations) and the <b>hidden truths</b> (relations only in held-out text).</li>
+<li>Builds a small <b>attention language model</b> and runs the <b>self-consuming loop</b>: each generation reads a share $u$ of text written by the previous one.</li>
+<li>Measures ten named variables per generation and fits a sparse <b>dynamical system</b> for how they change.</li>
+</ol>
+
+<h2>2. Words become vectors</h2>
+<div class="eq">$$\mathrm{PPMI}(i,j)=\max\!\left\{0,\ \log\frac{\#(i,j)/T}{\big(\#(i)/T\big)\,\hat P_{0.75}(j)}\right\}$$</div>
+<ul class="where">
+<li><b>$\#(i,j)$</b> co-occurrence count: how often word $j$ appears within $4$ words of word $i$ in the same sentence.</li>
+<li><b>$\#(i)$</b> how often word $i$ is the centre word, $\sum_j\#(i,j)$.</li>
+<li><b>$T$</b> total number of co-occurrences, $\sum_{i,j}\#(i,j)$.</li>
+<li><b>$\hat P_{0.75}(j)$</b> smoothed context probability, $\#(j)^{0.75}/\sum_k\#(k)^{0.75}$; the exponent $0.75$ stops very frequent words dominating.</li>
+<li><b>$\mathrm{PPMI}(i,j)$</b> positive pointwise mutual information: how much more often the pair occurs than chance, floored at $0$.</li>
+</ul>
+<div class="eq">$$\mathrm{PPMI}\approx U\Sigma V^{\top},\qquad e_i=\frac{U_i\,\Sigma^{1/2}}{\big\|U_i\,\Sigma^{1/2}\big\|}$$</div>
+<ul class="where">
+<li><b>$U,\Sigma,V$</b> truncated singular value decomposition keeping the $32$ largest singular values.</li>
+<li><b>$U_i$</b> row $i$ of $U$, the coordinates of word $i$.</li>
+<li><b>$e_i$</b> the <b>embedding</b> of word $i$: a unit vector of $32$ numbers. Words with similar meaning have a high cosine $e_i^{\top}e_j$. The table is fixed during the loop.</li>
+</ul>
+
+<h2>3. Concepts</h2>
+<p>A <b>content word</b> is not a stopword, not a proper name (capitalised in mid-sentence at least $60\%$ of the time), has $\ge3$ letters, occurs $\ge5$ times, and appears in at most $2\%$ of sentences (<code>DF_MAX</code>; generic words such as "said" cannot name an idea). Content words are clustered by weighted $k$-means:</p>
+<div class="eq">$$\min_{\{\mu_c\}}\ \sum_{w}\log(1+n_w)\,\big\|e_w-\mu_{c(w)}\big\|^{2},\qquad \bar\mu_c=\frac{\mu_c}{\|\mu_c\|}$$</div>
+<ul class="where">
+<li><b>$w$</b> a content word; <b>$e_w$</b> its embedding.</li>
+<li><b>$n_w$</b> how many times $w$ occurs in the readable text; $\log(1+n_w)$ stops very common words dominating a cluster.</li>
+<li><b>$c(w)\in\{1,\dots,150\}$</b> the <b>concept</b> assigned to $w$ ($150$ concepts, <code>N_CONCEPTS</code>).</li>
+<li><b>$\mu_c$</b> centre of concept $c$; <b>$\bar\mu_c$</b> its unit-length direction.</li>
+</ul>
+<p>Each concept is named by the four words nearest to $\bar\mu_c$ and by the most common WordNet category of its words.</p>
+
+<h2>4. Relations, fringe and hidden truth</h2>
+<div class="eq">$$e=\{a,b\}\ \text{is a relation in sentence } s\iff \exists\,p<q:\ \{c(w_p),c(w_q)\}=\{a,b\},\ a\ne b,\ q-p\le6$$</div>
+<ul class="where">
+<li><b>$e=\{a,b\}$</b> a <b>relation</b>: an unordered pair of two different concepts.</li>
+<li><b>$w_p$</b> the word at position $p$ of sentence $s$; <b>$c(w_p)$</b> its concept.</li>
+<li><b>$6$</b> the window (<code>REL_WINDOW</code>): the two words must be at most $6$ words apart. A relation counts once per sentence.</li>
+</ul>
+<div class="eq">$$S_0=\{e:w^{\mathrm{tr}}_e>0\},\quad \mathcal F=\{e\in S_0:\ w^{\mathrm{tr}}_e\le2\},\quad \mathcal H=\{e:\ w^{\mathrm{hid}}_e>0,\ e\notin S_0,\ e\subseteq\mathrm{known}\},\quad \mathcal T=S_0\cup\mathcal H$$</div>
+<ul class="where">
+<li><b>$w^{\mathrm{tr}}_e$</b> number of readable sentences containing relation $e$; <b>$w^{\mathrm{hid}}_e$</b> the same in the held-out text.</li>
+<li><b>$S_0$</b> the <b>real relations</b>.</li>
+<li><b>$\mathcal F$</b> the <b>fringe</b>: real relations seen at most twice (<code>FRINGE_PAIR_COUNT</code>).</li>
+<li><b>$\mathrm{known}$</b> concepts that occur in some relation of $S_0$.</li>
+<li><b>$\mathcal H$</b> the <b>hidden truths</b>: relations that appear only in held-out text, between known concepts.</li>
+<li><b>$\mathcal T$</b> everything counted as true.</li>
+</ul>
+<div class="eq">$$\pi_0(c)=\frac{n^{\mathrm{tr}}_c}{\sum_{c'}n^{\mathrm{tr}}_{c'}},\qquad m_e=\frac{\bar\mu_a+\bar\mu_b}{\|\bar\mu_a+\bar\mu_b\|}$$</div>
+<ul class="where">
+<li><b>$\pi_0$</b> the <b>real concept distribution</b>; <b>$n^{\mathrm{tr}}_c$</b> content tokens of concept $c$ in the readable text.</li>
+<li><b>$m_e$</b> the <b>meaning vector</b> of relation $e=\{a,b\}$: the normalised midpoint of its two concept directions.</li>
+</ul>
+
+<h2>5. The attention model</h2>
+<p>A sentence is $\langle s\rangle,w_1,\dots,w_m,\langle/s\rangle$ with embeddings $e_0,\dots,e_{m+1}$. Position $t$ has two attention heads.</p>
+<div class="eq">$$a_{tj}=\mathrm{softmax}_{j\le t}\Big(g\,e_t^{\top}e_j-\lambda\,(t-j)\Big),\qquad c_t=\sum_{j\le t}a_{tj}\,e_j$$</div>
+<ul class="where">
+<li><b>$t$</b> the current position; <b>$j\le t$</b> an earlier (or equal) position it may attend to.</li>
+<li><b>$a_{tj}$</b> the <b>context-head attention weight</b> from position $t$ to $j$ (sums to $1$ over $j$).</li>
+<li><b>$g=4$</b> gain: how strongly similar words attract attention. <b>$\lambda=0.25$</b> distance penalty: how fast attention fades with distance.</li>
+<li><b>$c_t$</b> the <b>context vector</b>: an attention-weighted average of the earlier words' embeddings.</li>
+</ul>
+<p>The <b>previous-token head</b> attends only to position $t-1$ and returns $e_{t-1}$ (zero at the start); it keeps local word order. The heads and the current word form one query (stored text forms keys the same way):</p>
+<div class="eq">$$q_t=\frac{1}{\sqrt{1+w^{2}+\omega^{2}}}\Big[\,e_t\ ;\ w\,e_{t-1}\ ;\ \omega\,\hat c_t\,\Big],\qquad \hat c_t=\frac{c_t}{\|c_t\|}$$</div>
+<ul class="where">
+<li><b>$q_t$</b> the <b>query</b>; the semicolons mean the three parts are joined into one vector.</li>
+<li><b>$w=0.8$</b> weight of the previous-token part; <b>$\omega=0.7$</b> weight of the context part. The factor in front makes $q_t$ unit length.</li>
+</ul>
+<p><b>Training is storage.</b> Every position $i$ of the training sentences becomes a slot $(k_i,v_i,n_i)$. Only the $K=4000$ slots with the largest $n_i$ are kept (ties at random), so rare material is dropped first: this is the model's finite capacity.</p>
+<div class="eq">$$\alpha_i=\mathrm{softmax}_i\big(\beta\,q^{\top}k_i+\gamma\log n_i\big),\qquad o=\sum_i\alpha_i\,v_i,\qquad p(w)=\mathrm{softmax}_w\!\Big(\frac{e_w^{\top}o}{\tau}\Big)$$</div>
+<ul class="where">
+<li><b>$k_i$</b> the stored key (the query computed at training position $i$); <b>$v_i$</b> the embedding of the word that followed.</li>
+<li><b>$n_i$</b> how many training positions share position $i$'s (word, next word) pair; $\gamma\log n_i$ with <b>$\gamma=1$</b> favours common patterns.</li>
+<li><b>$\beta=120$</b> sharpness of the memory read; <b>$\alpha_i$</b> the <b>memory attention weight</b> on slot $i$.</li>
+<li><b>$o$</b> the blended next-word vector. Because it blends several slots, the model can write a word near in meaning to what it stored.</li>
+<li><b>$\tau=0.04$</b> output temperature (<code>TAU_OUT</code>): higher means blurrier, more novel and less accurate. <b>$p(w)$</b> the probability of writing word $w$ next.</li>
+</ul>
+
+<h2>6. The self-consuming loop</h2>
+<div class="eq">$$n_s=\mathrm{round}(u\,n),\quad n_r=n-n_s,\qquad \mathrm{Train}_t=\underbrace{n_r\ \text{real sentences}}_{\text{drawn at random}}\ \cup\ \underbrace{\mathrm{Pool}_{t-1}[1..n_s]}_{\text{written by generation }t-1}$$</div>
+<ul class="where">
+<li><b>$n=600$</b> sentences per generation; <b>$u\in[0,1]$</b> the <b>synthetic share</b> (the control): $u=0$ no loop, $u=1$ fully synthetic.</li>
+<li><b>$n_s,n_r$</b> numbers of synthetic and fresh real sentences.</li>
+<li><b>$\mathrm{Pool}_t$</b> the $n$ sentences generation $t$ writes; it is both the source of the next generation's synthetic text and the text on which generation $t$ is measured. Generation $0$ reads $n$ real sentences.</li>
+</ul>
+
+<h2>7. The ten variables</h2>
+<div class="tw"><table>
+<tr><th>Symbol</th><th>Name</th><th>Level</th><th>Formula</th></tr>
+<tr><td>$D_t$</td><td>Data seen</td><td>sentence</td><td>$|\mathrm{Seen}_t|/N_R$</td></tr>
+<tr><td>$C_t$</td><td>Capture rate</td><td>word</td><td>$\frac1P\sum_i\mathbf 1\big[y_i\in\mathrm{top5}\,p(\cdot\mid q_i)\big]$</td></tr>
+<tr><td>$R_t$</td><td>Concept retrieval</td><td>concept</td><td>$1-\tfrac12\sum_c|\pi_t(c)-\pi_0(c)|$</td></tr>
+<tr><td>$Q_t$</td><td>Context use (reasoning vs knee-jerk)</td><td>attention</td><td>$\frac1P\sum_i\mathrm{TV}\big(p(\cdot\mid q_i),\,p(\cdot\mid q_i^{\sigma})\big)$</td></tr>
+<tr><td>$F_t$</td><td>Fringe retrieval</td><td>concept</td><td>$|\mathrm{rel}_t\cap\mathcal F|/|\mathcal F|$</td></tr>
+<tr><td>$A_t$</td><td>Fringe accuracy</td><td>word</td><td>$|\mathrm{tail}_t\cap\mathrm{real}|/|\mathrm{tail}_t|$</td></tr>
+<tr><td>$N_t$</td><td>Concept novelty</td><td>concept</td><td>$\sum_{e\in\mathrm{novel}_t}c_t(e)\big/\sum_e c_t(e)$</td></tr>
+<tr><td>$M_t$</td><td>Novelty–fringe proximity</td><td>concept</td><td>$\sum_{e\in\mathrm{novel}_t}c_t(e)\max_{f\in\mathcal F}m_e^{\top}m_f\big/\sum_{e\in\mathrm{novel}_t}c_t(e)$</td></tr>
+<tr><td>$V_t$</td><td>Validated discovery</td><td>concept</td><td>$|\mathrm{rel}_t\cap\mathcal H|/|\mathcal H|$</td></tr>
+<tr><td>$S_t$</td><td>Sentence diversity</td><td>sentence</td><td>$\min\{1,\ \bar d_t/\bar d_{\mathrm{real}}\}$</td></tr>
+</table></div>
+<ul class="where">
+<li><b>$\mathrm{Seen}_t$</b> real training sentences drawn into any training set so far; <b>$N_R$</b> the number of real training sentences.</li>
+<li><b>$P=300$</b> probe positions taken from the model's own training text; <b>$q_i$</b> the query at probe $i$; <b>$y_i$</b> the word that really followed; <b>$\mathrm{top5}$</b> the five most probable next words.</li>
+<li><b>$q_i^{\sigma}$</b> probe $i$ with its context part swapped for that of another random probe $\sigma(i)$; <b>$\mathrm{TV}(p,p')=\tfrac12\sum_w|p(w)-p'(w)|$</b> total variation between two next-word distributions. If $Q_t=0$ the model ignores attended context.</li>
+<li><b>$\pi_t$</b> concept distribution of $\mathrm{Pool}_t$ (same definition as $\pi_0$).</li>
+<li><b>$\mathrm{rel}_t$</b> relations present in $\mathrm{Pool}_t$; <b>$c_t(e)$</b> how often relation $e$ occurs there; <b>$\mathrm{novel}_t=\mathrm{rel}_t\setminus S_0$</b> relations never seen in training.</li>
+<li><b>$\mathrm{tail}_t$</b> word-pair types in $\mathrm{Pool}_t$ whose count is at or below the median count; <b>$\mathrm{real}$</b> word pairs that occur in the real text, readable or held out.</li>
+<li><b>$m_e,m_f$</b> meaning vectors of a novel relation and a fringe relation, so $M_t$ is high when new claims lie close to rare knowledge.</li>
+<li><b>$\mathcal F,\mathcal H$</b> as in section 4.</li>
+</ul>
+<p>Sentence diversity uses attention pooling of a sentence's content words:</p>
+<div class="eq">$$b_i=\mathrm{softmax}_i\!\Big(\frac{e_i^{\top}\bar e}{0.25}\Big),\qquad v_s=\frac{\sum_i b_i\,e_i}{\big\|\sum_i b_i\,e_i\big\|},\qquad \bar d=\mathbb E\big[\,1-v_s^{\top}v_{s'}\,\big]$$</div>
+<ul class="where">
+<li><b>$i$</b> a content word of the sentence; <b>$\bar e$</b> the normalised mean of their embeddings (the sentence's overall meaning).</li>
+<li><b>$b_i$</b> the <b>pooling weight</b>: words closest to the sentence's meaning count most. <b>$v_s$</b> the <b>sentence vector</b>.</li>
+<li><b>$\bar d$</b> mean cosine distance between two random sentences' vectors ($3000$ pairs); <b>$\bar d_t$</b> for $\mathrm{Pool}_t$ and <b>$\bar d_{\mathrm{real}}$</b> for real text. Low $S_t$ means the model keeps writing the same kind of sentence.</li>
+</ul>
+
+<h2>8. The dynamical system</h2>
+<div class="eq">$$z=\frac{x-\mu}{\sigma},\qquad \tilde u=\frac{u-\bar u}{s_u},\qquad z_{t+1}=z_t+\Theta(z_t,\tilde u)\,\Xi,\qquad \Theta=\big[\,1,\ z,\ \tilde u,\ z\,\tilde u,\ \tilde u^{2}\,\big]$$</div>
+<ul class="where">
+<li><b>$x$</b> the vector of the ten variables of section 7 for one generation; <b>$\mu,\sigma$</b> their mean and standard deviation over the training runs; <b>$z$</b> the standardised state.</li>
+<li><b>$\bar u,s_u$</b> mean and standard deviation of the training synthetic shares; <b>$\tilde u$</b> the standardised control.</li>
+<li><b>$\Theta$</b> the <b>library</b> of $23$ candidate terms: a constant, each state, the control, each state times the control, and the control squared. Products of two different states are left out because $240$ training rows cannot support $45$ more terms.</li>
+<li><b>$\Xi$</b> the $23\times10$ coefficient matrix to be found; most entries end up exactly zero.</li>
+<li><b>$z_{t+1}-z_t$</b> the change in one generation. A zero column of $\Xi$ means that variable does not change.</li>
+</ul>
+<div class="eq">$$w_{\mathcal S}=\big(\tilde\Theta_{\mathcal S}^{\top}\tilde\Theta_{\mathcal S}+\alpha\,m\,I\big)^{-1}\tilde\Theta_{\mathcal S}^{\top}Y_{\cdot k},\qquad \text{drop term }j\text{ if }|w_j|<\theta\,\max_{j'}|w^{(0)}_{j'}|$$</div>
+<ul class="where">
+<li><b>$\mathcal S$</b> the active (kept) terms; <b>$\tilde\Theta$</b> the library with columns scaled to unit rms; <b>$m$</b> number of training rows.</li>
+<li><b>$Y_{\cdot k}$</b> the one-generation changes of variable $k$; <b>$\alpha\in\{0.01,0.1,1\}$</b> ridge strength; <b>$I$</b> the identity matrix.</li>
+<li><b>$w^{(0)}$</b> the first fit with all terms; <b>$\theta\in\{0.05,\dots,0.60\}$</b> the relative threshold. Fitting and dropping repeat until the set stops changing. An equation explaining under $1\%$ of the change is set to zero.</li>
+</ul>
+<div class="eq">$$\mathrm{MSE}_{\mathrm{fr}}=\frac1{|\mathcal V|}\sum_{u\in\mathcal V}\frac1{(T+1)K}\sum_{t=0}^{T}\big\|\hat z_t(u)-\bar z_t(u)\big\|^{2},\qquad \mathrm{skill}_{k}=1-\frac{\sum_t(\hat z_{t,k}-\bar z_{t,k})^2}{\sum_t(\bar z_{0,k}-\bar z_{t,k})^2}$$</div>
+<ul class="where">
+<li><b>$\hat z_t(u)$</b> the fitted system <b>free-run</b> from the generation-0 state (no correction); states beyond $\pm6$ are clipped and counted.</li>
+<li><b>$\bar z_t(u)$</b> the average real trajectory at share $u$; <b>$\mathcal V$</b> the validation shares $\{0.4,0.9\}$; <b>$T=12$</b> generations; <b>$K=10$</b> variables.</li>
+<li><b>$\mathrm{skill}_k$</b> for variable $k$ on test shares $\{0.1,0.6,0.95\}$: $1$ perfect, $0$ no better than "nothing changes", negative worse.</li>
+<li>Models are ranked by fewest clipped steps (including a $36$-generation stability run), then lowest $\mathrm{MSE}_{\mathrm{fr}}$, then the sparsest within $10\%$ of the best.</li>
+</ul>
+
+<h2>9. Sweeps</h2>
+<div class="eq">$$\mathrm{Retention}(u)=\frac{\bar F_T(u)}{\bar F_0(u)},\qquad \mathrm{Yield}=\frac{|\mathrm{rel}_T\cap\mathcal H|}{|\mathrm{novel}_T|}$$</div>
+<ul class="where">
+<li><b>$\bar F_t(u)$</b> the mean fringe retrieval at share $u$ and generation $t$; <b>Retention</b> is the share of the generation-0 fringe left after $T$ generations.</li>
+<li><b>Yield</b> proved relations per new relation written, computed while the output temperature $\tau$ is varied over $\{0.02,\dots,0.09\}$ at $u=0.5$.</li>
+</ul>
+
+<h2>10. What my test run showed, and limits</h2>
+<p>I could not download the Sherlock texts, so I ran the notebook on other novels (Austen, Chesterton, Melville and similar). It checks the machinery, not Sherlock.</p>
+<ul>
+<li><b>Collapse at $u=1$:</b> $S$ fell from about $0.9$ to $0.05$, $R$ from $0.6$ to $0.03$, $Q$ and $F$ to $0$, while $C$ rose to $0.99$. The model wrote near-identical phrases ("think not be such a whale") and a few concepts took over, one from $1.2\%$ to about $33\%$ of the text.</li>
+<li><b>$u=0$:</b> stable apart from $D$, which accumulates by design. <b>Fringe:</b> only $u=0$ kept half of the generation-0 fringe relations.</li>
+<li><b>Fitted system:</b> $79$ of $230$ terms, no clipping, free-run skill $+0.82$, $+0.85$, $+0.79$ at $u=0.1,0.6,0.95$; one-step skill only $+0.23$. Good for $R,F,V,C,Q$, weak for $N$ and $A$ (about $-0.9$ to $+0.1$) and for $S$ at $u=0.95$.</li>
+<li><b>Limits:</b> training is storage and embeddings are fixed, so this is a toy attention model; concepts are word clusters; "proved" means present in held-out text; fringe retention is a proxy, not a measure of values; twelve generations and four runs compare conditions but do not give constants.</li>
+</ul>
+</main>
+<script>
+document.addEventListener('click',function(e){if(!e.target.closest('.term'))document.querySelectorAll('.term.open').forEach(function(t){t.classList.remove('open')})});
+</script>
+</body>
+</html>
